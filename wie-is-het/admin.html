@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wie is het? Host</title>
+  <title>Wie is het? Spelscherm</title>
   <link rel="stylesheet" href="css/style.css" />
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
@@ -14,63 +14,19 @@
   <div class="bg"></div>
   <main class="app">
     <section id="login" class="card hero">
-      <div class="pill">👑 Host</div>
-      <h1>Wie is het? Host</h1>
-      <p class="sub">Start rondes, zet een tijdlimiet, onthul antwoorden en geef bonuspunten voor de beste motivatie.</p>
-      <label>Hostcode</label>
-      <input id="code" placeholder="Hostcode" />
-      <button id="loginBtn" class="primary">Open hostpaneel</button>
+      <div class="pill">📺 Optioneel spelscherm</div>
+      <h1>Wie is het?</h1>
+      <p class="sub">Je hoeft dit scherm niet te gebruiken om mee te doen. Het spel loopt automatisch: 90 seconden per ronde, daarna onthullen en punten verwerken. Dit scherm is handig voor resetten of om het scorebord groot open te zetten.</p>
+      <label>Hostcode</label><input id="code" placeholder="Hostcode" />
+      <button id="loginBtn" class="primary">Open spelscherm</button>
       <p class="help">Standaard hostcode: LILLE2026</p>
     </section>
-
     <section id="host" class="hidden">
-      <header class="topbar">
-        <div>
-          <div class="tiny">Hostpaneel</div>
-          <h2>Wie is het?</h2>
-        </div>
-        <button id="resetBtn" class="danger">Reset spel</button>
-      </header>
-
-      <section class="card">
-        <h3>Uitleg voor de groep</h3>
-        <p class="help">Elke auto probeert te voorspellen welk antwoord de meerderheid kiest. Goed = inzet erbij. Fout = inzet eraf. Als iedereen hetzelfde kiest, krijgt iedereen maar 1 punt: veilig spelen wordt dus minder beloond.</p>
-      </section>
-
-      <section class="card">
-        <div class="round-meta"><span id="hostRoundLabel">Ronde</span><span id="hostTimer" class="timer">--:--</span></div>
-        <h3 id="hostQuestion">Vraag</h3>
-        <label>Tijdlimiet</label>
-        <select id="durationSelect">
-          <option value="45">45 seconden</option>
-          <option value="60" selected>60 seconden</option>
-          <option value="90">90 seconden</option>
-          <option value="120">120 seconden</option>
-        </select>
-        <div class="row">
-          <button id="prevBtn" class="ghost">← Vorige vraag</button>
-          <button id="nextBtn" class="primary">Start volgende ronde →</button>
-        </div>
-        <button id="restartTimerBtn" class="ghost">Timer opnieuw starten voor deze ronde</button>
-        <button id="revealBtn" class="primary alt">Onthul + bereken punten</button>
-        <p class="help">Laat elke auto binnen de tijd antwoord + inzet invullen. Daarna onthullen.</p>
-      </section>
-
-      <section class="card">
-        <h3>Inzendingen</h3>
-        <div id="hostAnswers" class="answers"></div>
-      </section>
-
-      <section class="card">
-        <h3>Bonuspunten geven</h3>
-        <p class="help">Bijvoorbeeld voor beste motivatie, hardste roast of perfecte groepsinschatting.</p>
-        <div id="bonusList"></div>
-      </section>
-
-      <section class="card">
-        <h3>Scorebord</h3>
-        <div id="hostLeaderboard"></div>
-      </section>
+      <header class="topbar"><div><div class="tiny">Spelscherm</div><h2>Wie is het?</h2></div><div class="top-actions"><button id="nextBtn" class="green">Start volgende ronde</button><button id="revealBtn" class="ghost">Onthul nu</button><button id="resetBtn" class="danger">Reset spel</button></div></header>
+      <section class="card round-card"><div class="round-meta"><span id="hostRoundLabel">Ronde</span><span id="hostTimer" class="timer">--:--</span></div><div id="hostCategory" class="category most">Wachten</div><h3 id="hostQuestion" class="question">Vraag</h3><p id="hostExplain" class="help">90 seconden per ronde. Daarna wordt automatisch onthuld.</p><div class="statusbar"><div class="notice"><span class="tiny">Teams</span><strong id="teamCount">0</strong></div><div class="notice"><span class="tiny">Antwoorden</span><strong id="answerCount">0</strong></div><div class="notice"><span class="tiny">Status</span><strong id="hostStatus">Wachten</strong></div></div></section>
+      <section class="card"><h3>Speluitleg</h3><p class="help"><b>Iedere auto speelt mee via de gewone link.</b> Per ronde kiest elk team één antwoord en een inzet van 1, 3 of 5 punten. Bij Most likely wint de duidelijke meerderheid. Bij quotes, feiten en waar/leugen is er één goed antwoord.</p></section>
+      <section class="card"><h3>Antwoorden</h3><div id="hostSummary" class="notice hidden"></div><div id="hostAnswers" class="answers"></div></section>
+      <section class="card"><h3>Scorebord</h3><div id="hostLeaderboard"></div></section>
     </section>
   </main>
   <script src="js/admin.js"></script>

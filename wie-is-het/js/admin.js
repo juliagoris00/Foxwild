@@ -1,72 +1,14 @@
 (function(){
-  const $=(id)=>document.getElementById(id);
-  const cfg=window.firebaseConfig||{};
-  const ready=cfg && cfg.apiKey && cfg.apiKey!=='VUL_HIER_IN' && cfg.databaseURL && cfg.databaseURL!=='VUL_HIER_IN';
-  if(!ready) alert('Firebase is nog niet gekoppeld. Vul js/firebase-config.js in.');
-  firebase.initializeApp(cfg);
-  const db=firebase.database();
-  const gameId=window.RUMBLE_GAME_ID||'wie-is-het-2026';
-  const base=db.ref('games/'+gameId);
-  let state={round:0,revealed:false,startedAt:null,duration:60}; let teams={}; let rounds={};
-  const qFor=i=>window.RUMBLE_QUESTIONS[i % window.RUMBLE_QUESTIONS.length];
-  const esc=s=>String(s||'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));
-  const format=sec=>{ if(sec===null) return '--:--'; const m=Math.floor(sec/60); const s=String(sec%60).padStart(2,'0'); return `${m}:${s}`; };
-  function timeLeft(){ if(!state.startedAt) return null; const end=state.startedAt+((state.duration||60)*1000); return Math.max(0,Math.ceil((end-Date.now())/1000)); }
-  function render(){
-    const q=qFor(state.round||0);
-    $('hostRoundLabel').textContent='Ronde '+((state.round||0)+1)+(state.revealed?' · onthuld':'');
-    $('hostQuestion').textContent=q.text;
-    const left=timeLeft();
-    $('hostTimer').textContent=format(left);
-    $('hostTimer').classList.toggle('low', left!==null && left<=10 && left>0);
-    $('durationSelect').value=String(state.duration||60);
-    const answers=(((rounds||{})[state.round]||{}).answers)||{};
-    const arr=Object.values(answers);
-    $('hostAnswers').innerHTML=arr.length?arr.map(a=>`<div class="answer"><b>${esc(a.teamName)}</b><div>Antwoord: <b>${esc(a.answer)}</b> · inzet ${a.bet}</div><div class="meta">${esc(a.reason||'Geen motivatie')}</div></div>`).join(''):'<p class="help">Nog geen antwoorden.</p>';
-    $('bonusList').innerHTML=arr.length?arr.map(a=>`<div class="bonus-row"><span><b>${esc(a.teamName)}</b></span><button class="ghost" data-bonus="1" data-team="${a.teamId}">+1</button><button class="ghost" data-bonus="3" data-team="${a.teamId}">+3</button></div>`).join(''):'<p class="help">Nog niemand om bonus te geven.</p>';
-    document.querySelectorAll('[data-bonus]').forEach(b=>b.onclick=()=>addScore(b.dataset.team,Number(b.dataset.bonus)));
-    renderScores();
-  }
-  function renderScores(){
-    const arr=Object.values(teams||{}).sort((a,b)=>(b.score||0)-(a.score||0));
-    $('hostLeaderboard').innerHTML=arr.length?arr.map((t,i)=>`<div class="score ${i===0?'winner':''}"><b>${i+1}. ${esc(t.name)}</b><div class="meta">${t.score||0} punten · ${esc(t.players||'')}</div></div>`).join(''):'<p class="help">Nog geen teams.</p>';
-  }
-  async function addScore(teamId, points){
-    const ref=base.child('teams/'+teamId+'/score');
-    await ref.transaction(v=>(v||0)+points);
-  }
-  async function setRound(round){
-    const duration=Number($('durationSelect').value||60);
-    await base.child('state').set({round:Math.max(0,round),revealed:false,startedAt:Date.now(),duration});
-  }
-  async function revealAndScore(){
-    const answers=(((rounds||{})[state.round]||{}).answers)||{};
-    const arr=Object.values(answers);
-    if(arr.length<2 && !confirm('Er zijn minder dan 2 antwoorden. Toch onthullen?')) return;
-    const counts={}; arr.forEach(a=>counts[a.answerKey]=(counts[a.answerKey]||0)+1);
-    const max=Math.max(0,...Object.values(counts));
-    const winners=Object.keys(counts).filter(k=>counts[k]===max && max>1);
-    const allSame = winners.length===1 && max===arr.length && arr.length>1;
-    const updates={};
-    arr.forEach(a=>{
-      let delta=0;
-      if(winners.includes(a.answerKey)) delta=allSame?1:(a.bet||1);
-      else delta=-(a.bet||1);
-      updates['teams/'+a.teamId+'/score']=(teams[a.teamId]?.score||0)+delta;
-      updates['rounds/'+state.round+'/results/'+a.teamId]=delta;
-    });
-    updates['state/revealed']=true;
-    await base.update(updates);
-    alert('Onthuld! '+(winners.length?'Meerderheid: '+winners.join(', '):'Geen duidelijke meerderheid')+'. Punten zijn bijgewerkt.');
-  }
-  $('loginBtn').onclick=()=>{ if($('code').value.trim() !== (window.RUMBLE_ADMIN_CODE||'LILLE2026')) return alert('Verkeerde code'); $('login').classList.add('hidden'); $('host').classList.remove('hidden'); };
-  $('nextBtn').onclick=()=> setRound((state.round||0)+1);
-  $('prevBtn').onclick=()=> setRound(Math.max(0,(state.round||0)-1));
-  $('restartTimerBtn').onclick=()=> setRound(state.round||0);
-  $('revealBtn').onclick=revealAndScore;
-  $('resetBtn').onclick=async()=>{ if(confirm('Hele spel resetten? Scores en antwoorden verdwijnen.')) await base.set({state:{round:0,revealed:false,startedAt:null,duration:60}}); };
-  base.child('state').on('value',s=>{state=s.val()||{round:0,revealed:false,startedAt:null,duration:60};render();});
-  base.child('teams').on('value',s=>{teams=s.val()||{};render();});
-  base.child('rounds').on('value',s=>{rounds=s.val()||{};render();});
-  setInterval(render,500);
+  const $=(id)=>document.getElementById(id); const cfg=window.firebaseConfig||{}; const ready=cfg&&cfg.apiKey&&cfg.apiKey!=='VUL_HIER_IN'&&cfg.databaseURL&&cfg.databaseURL!=='VUL_HIER_IN'; if(!ready) alert('Firebase is nog niet gekoppeld. Vul js/firebase-config.js in.');
+  firebase.initializeApp(cfg); const db=firebase.database(); const gameId=window.WIE_IS_HET_GAME_ID||'wie-is-het-2026'; const ROUND_SECONDS=Number(window.WIE_IS_HET_ROUND_SECONDS||90); const base=db.ref('games/'+gameId); const questions=window.WIE_IS_HET_QUESTIONS||[{type:'most',prompt:'Vraag'}];
+  let state={round:-1,status:'waiting',startedAt:null,duration:ROUND_SECONDS}; let teams={}; let rounds={}; let revealBusy=false;
+  const esc=s=>String(s||'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m])); const norm=s=>String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+  const qFor=i=>questions[((i||0)%questions.length+questions.length)%questions.length]; const typeLabel=q=>q.type==='quote'?'Wie zei deze quote?':q.type==='truth'?'Waar of leugen?':q.type==='person'?'Foxwild-feit':'Most likely'; const typeClass=q=>q.type==='quote'?'quote':q.type==='truth'?'truth':q.type==='person'?'person':'most'; const format=sec=>{if(sec===null)return'--:--';const m=Math.floor(sec/60),s=String(sec%60).padStart(2,'0');return`${m}:${s}`;};
+  function timeLeft(){if(state.status!=='active'||!state.startedAt)return null;const end=Number(state.startedAt)+Number(state.duration||ROUND_SECONDS)*1000;return Math.max(0,Math.ceil((end-Date.now())/1000));} function getRound(){return rounds[String(state.round)]||rounds[state.round]||{};} function currentStatus(){if(state.status==='active')return timeLeft()===0?'Tijd voorbij':'Open';if(state.status==='revealed')return'Onthuld';return'Wachten';}
+  function render(){const q=state.round>=0?qFor(state.round):{type:'most',prompt:'Nog niet gestart.'};$('hostRoundLabel').textContent=state.round>=0?'Ronde '+(state.round+1):'Nog niet gestart';$('hostCategory').textContent=state.round>=0?typeLabel(q):'Wachten';$('hostCategory').className='category '+typeClass(q);$('hostQuestion').textContent=q.prompt;const left=timeLeft();$('hostTimer').textContent=format(left);$('hostTimer').classList.toggle('low',left!==null&&left<=10&&left>0);$('teamCount').textContent=Object.keys(teams||{}).length;const answers=(getRound().answers)||{};const arr=Object.values(answers);$('answerCount').textContent=arr.length;$('hostStatus').textContent=currentStatus();const round=getRound();if(round.summary){$('hostSummary').classList.remove('hidden');$('hostSummary').innerHTML=esc(round.summary);}else{$('hostSummary').classList.add('hidden');}$('hostAnswers').innerHTML=arr.length?arr.sort((a,b)=>(a.at||0)-(b.at||0)).map(a=>{const result=((round.results||{})[a.teamId])||null;const r=result?`<div class="meta ${result.delta>0?'result-good':result.delta<0?'result-bad':'result-neutral'}">${result.delta>0?'+':''}${result.delta} punten · ${esc(result.label||'')}</div>`:'';return`<div class="answer"><b>${esc(a.teamName)}</b><div>koos <b>${esc(a.answer)}</b> · inzet ${esc(a.bet)}</div>${r}</div>`;}).join(''):'<p class="help">Nog geen antwoorden.</p>';renderScores();if(state.status==='active'&&left===0&&!revealBusy){revealAndScore();}}
+  function renderScores(){const arr=Object.values(teams||{}).sort((a,b)=>(b.score||0)-(a.score||0));$('hostLeaderboard').innerHTML=arr.length?arr.map((t,i)=>`<div class="score ${i===0?'winner':''}"><b>${i+1}. ${esc(t.name)}</b><div class="meta">${t.score||0} punten${t.players?' · '+esc(t.players):''}</div></div>`).join(''):'<p class="help">Nog geen teams.</p>';}
+  async function startNextRound(){const ref=base.child('state');ref.transaction(s=>{s=s||{round:-1,status:'waiting'};if(s.status==='active')return;const next=(typeof s.round==='number'&&s.round>=0&&s.status!=='waiting')?s.round+1:0;return{round:next,status:'active',startedAt:Date.now(),duration:ROUND_SECONDS};},async(err,committed,snap)=>{if(err)return alert('Starten lukte niet: '+err.message);if(committed&&snap&&snap.val()){const s=snap.val();await base.child('rounds/'+s.round).update({questionIndex:s.round%questions.length,startedAt:s.startedAt,type:qFor(s.round).type});}});}
+  async function revealAndScore(){if(state.round<0)return;revealBusy=true;const lockRef=base.child('rounds/'+state.round+'/scoreLock');lockRef.transaction(v=>v?undefined:'admin',async(err,committed)=>{if(err||!committed){revealBusy=false;return;}try{await calculate(state.round);}finally{revealBusy=false;}});}
+  async function calculate(roundNo){const snap=await base.once('value');const data=snap.val()||{};const round=((data.rounds||{})[roundNo])||{};if(round.scoredAt){await base.child('state').update({status:'revealed'});return;}const q=qFor(roundNo);const answers=Object.values((round.answers)||{});const updates={};if(!answers.length){updates['rounds/'+roundNo+'/summary']='Geen antwoorden deze ronde.';updates['rounds/'+roundNo+'/scoredAt']=Date.now();updates['state/status']='revealed';await base.update(updates);return;}const currentTeams=data.teams||{};let summary='';if(q.type==='most'){const counts={},display={};answers.forEach(a=>{counts[a.answerKey]=(counts[a.answerKey]||0)+1;display[a.answerKey]=display[a.answerKey]||a.answer;});const max=Math.max(...Object.values(counts));const top=Object.keys(counts).filter(k=>counts[k]===max);const unique=top.length===1&&max>1;const allSame=unique&&max===answers.length&&answers.length>1;summary=allSame?`Iedereen koos ${display[top[0]]}. Te makkelijk: iedereen krijgt +1.`:unique?`Meerderheid: ${display[top[0]]} (${max} auto's).`:'Geen duidelijke meerderheid. Deze ronde blijft puntloos.';answers.forEach(a=>{let delta=0,label='';if(allSame){delta=1;label='iedereen hetzelfde';}else if(unique&&a.answerKey===top[0]){delta=Number(a.bet||1);label='meerderheid goed';}else if(unique){delta=-Number(a.bet||1);label='naast de meerderheid';}else{delta=0;label='gelijke stand';}updates['teams/'+a.teamId+'/score']=(currentTeams[a.teamId]?.score||0)+delta;updates['rounds/'+roundNo+'/results/'+a.teamId]={delta,label};});}else{const correctKey=norm(q.answer);summary=(q.type==='quote'?`De quote was van ${q.answer}.`:q.type==='truth'?`Het was: ${q.answer}.`:`Goede antwoord: ${q.answer}.`)+(q.explain?' '+q.explain:'');answers.forEach(a=>{const good=a.answerKey===correctKey;const delta=good?Number(a.bet||1):-Number(a.bet||1);const label=good?'goed':'fout';updates['teams/'+a.teamId+'/score']=(currentTeams[a.teamId]?.score||0)+delta;updates['rounds/'+roundNo+'/results/'+a.teamId]={delta,label};});}updates['rounds/'+roundNo+'/summary']=summary;updates['rounds/'+roundNo+'/scoredAt']=Date.now();updates['state/status']='revealed';await base.update(updates);}
+  $('loginBtn').onclick=()=>{if($('code').value.trim()!==(window.WIE_IS_HET_ADMIN_CODE||'LILLE2026'))return alert('Verkeerde code');$('login').classList.add('hidden');$('host').classList.remove('hidden');}; $('nextBtn').onclick=startNextRound; $('revealBtn').onclick=revealAndScore; $('resetBtn').onclick=async()=>{if(confirm('Hele spel resetten? Teams, scores en antwoorden verdwijnen.'))await base.set({state:{round:-1,status:'waiting',startedAt:null,duration:ROUND_SECONDS}});}; base.child('state').on('value',s=>{state=s.val()||{round:-1,status:'waiting',startedAt:null,duration:ROUND_SECONDS};render();});base.child('teams').on('value',s=>{teams=s.val()||{};render();});base.child('rounds').on('value',s=>{rounds=s.val()||{};render();});setInterval(render,500);
 })();

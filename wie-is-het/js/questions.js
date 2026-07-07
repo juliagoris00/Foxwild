@@ -1,72 +1,561 @@
-window.RUMBLE_QUESTIONS = [
-  {type:"Majority", text:"Wie zegt dit weekend ‘ik doe rustig aan’ met de energie van iemand die binnen 2 uur ontspoort?"},
-  {type:"Majority", text:"Wie heeft de grootste kans om in Lille een volledig nieuw vriendengroepje te adopteren?"},
-  {type:"Majority", text:"Wie verdwijnt het meest waarschijnlijk 25 minuten en komt terug met ‘ik was gewoon buiten’?"},
-  {type:"Majority", text:"Wie bestelt in het Frans met zóveel zelfvertrouwen dat niemand durft te zeggen dat het fout was?"},
-  {type:"Majority", text:"Wie gaat het eerst dramatisch honger hebben alsof de situatie humanitair wordt?"},
-  {type:"Majority", text:"Wie gaat het hardst doen alsof hij/zij de route weet, terwijl Google Maps letterlijk openstaat?"},
-  {type:"Majority", text:"Wie heeft de meeste kans om zondag wakker te worden met een verhaal dat klinkt alsof het verzonnen is?"},
-  {type:"Majority", text:"Wie wordt dit weekend de onofficiële burgemeester van Lille?"},
-  {type:"Majority", text:"Wie zegt ‘nog één drankje’ op een manier waarop iedereen weet: dit is geen één drankje?"},
-  {type:"Majority", text:"Wie wordt emotioneel van een fout nummer alsof het speciaal voor hem/haar geschreven is?"},
-  {type:"Majority", text:"Wie heeft de grootste kans om de hele avond met hetzelfde halfvolle drankje rond te lopen?"},
-  {type:"Majority", text:"Wie maakt dit weekend de meest twijfelachtige financiële beslissing en noemt het daarna ‘investeren in herinneringen’?"},
-  {type:"Majority", text:"Wie klaagt het hardst over de rekening maar bestelde zelf alsof de koning betaalde?"},
-  {type:"Majority", text:"Wie flirt het meest zonder door te hebben dat het flirten is?"},
-  {type:"Majority", text:"Wie maakt het snelst een beste vriend voor het leven in de wc-rij?"},
-  {type:"Majority", text:"Wie wordt zó competitief over dit spel dat hij/zij gaat zeggen dat de regels oneerlijk zijn?"},
-  {type:"Majority", text:"Wie gaat als eerste zeggen dat Lille ‘eigenlijk best romantisch’ is?"},
-  {type:"Majority", text:"Wie eindigt waarschijnlijk op een foto waar later ‘verwijderen aub’ onder komt te staan?"},
-  {type:"Majority", text:"Wie is de persoon die iedereen kwijt is terwijl hij/zij gewoon naast de groep staat?"},
-  {type:"Majority", text:"Wie wordt de grootste liability bij het tankstation?"},
-  {type:"Majority", text:"Wie vraagt als eerste ‘hoe ver is het nog?’ alsof we op kamp zijn?"},
-  {type:"Majority", text:"Wie ontwikkelt in Lille waarschijnlijk een compleet alter ego?"},
-  {type:"Majority", text:"Wie heeft de meeste ‘ik regel dit wel’-energie maar regelt uiteindelijk vooral paniek?"},
-  {type:"Majority", text:"Wie zegt het vaakst ‘ik ben echt niet dronken’ met exact de stem van iemand die dat wel is?"},
-  {type:"Majority", text:"Wie zou het beste kunnen liegen tegen de groep en ermee wegkomen?"},
-  {type:"Majority", text:"Wie gebruikt het vaakst ‘ik ben volwassen’ in situaties die het tegenovergestelde bewijzen?"},
-  {type:"Majority", text:"Wie wordt het snelst vrienden met personeel?"},
-  {type:"Majority", text:"Wie laat zijn/haar telefoon op 3% staan en noemt dat ‘prima’?"},
-  {type:"Majority", text:"Wie koopt het meest nutteloze souvenir en verdedigt het alsof het kunst is?"},
-  {type:"Majority", text:"Wie doet het meest overtuigend alsof hij/zij voor cultuur naar Lille komt?"},
-  {type:"Majority", text:"Wie vraagt zondagochtend het meest verdacht: ‘heb ik iets raars gedaan?’"},
-  {type:"Roast", text:"Wie heeft de meest gevaarlijke combinatie van zelfvertrouwen en slechte ideeën?"},
-  {type:"Roast", text:"Wie is de grootste kanshebber om zichzelf dit weekend volledig te exposen?"},
-  {type:"Roast", text:"Wie sloopt een groepsplanning het snelst met de zin ‘ik heb een beter idee’?"},
-  {type:"Roast", text:"Wie doet het vaakst ‘even snel’ iets en is dan drie kwartier weg?"},
-  {type:"Roast", text:"Wie krijgt main character syndrome zodra er muziek aanstaat?"},
-  {type:"Roast", text:"Wie praat zichzelf het makkelijkst uit een situatie die hij/zij zelf veroorzaakt heeft?"},
-  {type:"Roast", text:"Wie heeft het hoogste ‘ik kan dit aan’-niveau met het laagste bewijs?"},
-  {type:"Roast", text:"Wie ziet er het meest uit alsof hij/zij morgen zegt: ‘dit was niet mijn schuld’?"},
-  {type:"Roast", text:"Wie heeft de meeste kans om een slecht idee te presenteren alsof het een businessplan is?"},
-  {type:"Roast", text:"Wie gaat dit weekend het vaakst slachtoffer worden van eigen enthousiasme?"},
-  {type:"Majority", text:"Wie wordt de groepsadvocaat als iemand een dom plan heeft?"},
-  {type:"Majority", text:"Wie gaat de eerste zijn die ‘we moeten NU eten’ zegt?"},
-  {type:"Majority", text:"Wie heeft het meeste kans om per ongeluk in een andere kroeg dan de rest te staan?"},
-  {type:"Majority", text:"Wie maakt het meest dramatische entree in de eerste bar?"},
-  {type:"Majority", text:"Wie gaat het hardst ontkennen dat hij/zij moe is terwijl de ogen al dichtvallen?"},
-  {type:"Majority", text:"Wie is het meest waarschijnlijk om ineens DJ te willen zijn in de auto?"},
-  {type:"Majority", text:"Wie heeft de grootste kans om een verhaal te beginnen met ‘oké luister…’ en dan wordt het verdacht?"},
-  {type:"Majority", text:"Wie gaat zich gedragen alsof hij/zij Lille persoonlijk heeft ontdekt?"},
-  {type:"Majority", text:"Wie wordt de persoon die bij elke bar zegt: ‘de volgende is beter’?"},
-  {type:"Majority", text:"Wie gaat het eerste met iemand discussiëren over iets waar die eigenlijk niks van weet?"},
-  {type:"Majority", text:"Wie heeft de grootste kans om de groep kwijt te raken omdat die ‘even een foto’ wilde maken?"},
-  {type:"Majority", text:"Wie zou als eerste bij een random tafel aanschuiven alsof hij/zij uitgenodigd was?"},
-  {type:"Majority", text:"Wie heeft de meeste kans om het weekend samen te vatten als ‘legendarisch’ nog vóór het begonnen is?"},
-  {type:"Majority", text:"Wie gaat bij aankomst in Lille meteen doen alsof hij/zij locals begrijpt?"},
-  {type:"Majority", text:"Wie wordt het hardst geraakt door de eerste slechte grap van de avond?"},
-  {type:"Majority", text:"Wie heeft het meeste risico op een ‘we praten hier morgen over’-moment?"},
-  {type:"Majority", text:"Wie is het meest waarschijnlijk om precies de verkeerde persoon te vertrouwen met navigatie?"},
-  {type:"Majority", text:"Wie gaat als eerste iets kwijt zijn en heel overtuigend zeggen dat iemand anders het had?"},
-  {type:"Majority", text:"Wie heeft de grootste kans om een groepsfoto te verpesten en daarna te zeggen dat hij/zij hem juist redde?"},
-  {type:"Majority", text:"Wie wordt waarschijnlijk de commentator van de avond?"},
-  {type:"Majority", text:"Wie heeft de meeste kans om een dramatische monoloog te houden over vriendschap?"},
-  {type:"Majority", text:"Wie gaat op zondag het meeste doen alsof hij/zij nergens last van heeft?"},
-  {type:"Majority", text:"Wie gaat het vaakst ‘ik zweer het’ zeggen in een verhaal dat steeds minder geloofwaardig wordt?"},
-  {type:"Majority", text:"Wie is het meest waarschijnlijk om een bar binnen te lopen en meteen te zeggen: ‘dit is de vibe’?"},
-  {type:"Majority", text:"Wie heeft het grootste talent voor chaos creëren zonder ooit verantwoordelijkheid te nemen?"},
-  {type:"Majority", text:"Wie zou in een noodsituatie eerst een grap maken en daarna pas helpen?"},
-  {type:"Majority", text:"Wie heeft de meeste kans om bij thuiskomst te zeggen: ‘we moeten dit vaker doen’ en dan 3 dagen stil te zijn?"},
-  {type:"Majority", text:"Wie gaat tijdens de rit al praten alsof we op aftermovie-materiaal zitten?"},
-  {type:"Majority", text:"Wie wordt de persoon die elke keuze ‘strategisch’ noemt, ook als het gewoon dom is?"}
+window.WIE_IS_HET_PLAYERS = [
+  "Anna",
+  "Anne",
+  "Floris",
+  "Hugo",
+  "Jasper",
+  "Roos",
+  "Thomas",
+  "Stefan",
+  "Pim",
+  "Julia",
+  "Kyo",
+  "Klaas",
+  "Wouter",
+  "Chandler",
+  "Jacob",
+  "Toon",
+  "Teun",
+  "Tessa"
+];
+
+window.WIE_IS_HET_QUESTIONS = [
+  {
+    "type": "most",
+    "prompt": "Wie zegt zaterdag waarschijnlijk als eerste: ‘ik doe vanavond rustig aan’ en bedoelt daar niks van?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Wat voel ik nou bewegen in mijn tas, ohhhh dat is de Coolbest.",
+    "answer": "Julia"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand vroeg ooit serieus: ‘Is kreeft een sterrenbeeld?’",
+    "answer": "Waar",
+    "explain": "Ja. Dat staat in de quotegroep.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Een auto is eigenlijk gewoon een hele dure box.",
+    "answer": "Klaas"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie wordt tijdens de rit al verdacht van chaos voordat er überhaupt iets is gebeurd?"
+  },
+  {
+    "type": "person",
+    "prompt": "Wie maakte de lustrumgroep aan?",
+    "answer": "Jasper",
+    "explain": "Volgens de WhatsApp-export werd de groep door Jasper aangemaakt."
+  },
+  {
+    "type": "quote",
+    "prompt": "Iets anders dan een quote in de quote groep sturen is een bak.",
+    "answer": "Roos"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie gaat dit spel veel te serieus nemen en daarna zeggen dat het ‘maar een spelletje’ is?"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand zei ooit dat een auto eigenlijk gewoon een hele dure box is.",
+    "answer": "Waar",
+    "explain": "Waar. En eerlijk: niet eens volledig onjuist.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik ben erachter gekomen dat als ik laag zing ik best mooi kan zingen.",
+    "answer": "Jacob"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie probeert de andere auto’s het hardst te beïnvloeden met appjes in de groepschat?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik ben nog lang niet moe, ik ben de Bieber van de kroeg.",
+    "answer": "Thomas"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand dacht ooit dat paella altijd een broodje was.",
+    "answer": "Waar",
+    "explain": "Waar. Culinaire zekerheid was die dag ver te zoeken.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "He, maar vandaag gaan we rustig aan doen hè?",
+    "answer": "Floris"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie is de veiligste keuze bij elke vraag waarin drank, verdwalen of slechte beslissingen voorkomen?"
+  },
+  {
+    "type": "person",
+    "prompt": "Wie stuurde de eerste grote rits Airbnb-links in de lustrumgroep?",
+    "answer": "Jasper",
+    "explain": "De vakantieplanning begon duidelijk met Jasper in regelmodus."
+  },
+  {
+    "type": "quote",
+    "prompt": "De enige quote die ik ken is de Quote 500.",
+    "answer": "Klaas"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie zou het meest overtuigend iets uitleggen dat compleet nergens op slaat?"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand vroeg ooit: ‘Hoe spel je Arnhem?’",
+    "answer": "Waar",
+    "explain": "Waar. De Nederlandse taal blijft een risico.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Wat heb je aan succes als je niks kan delen.",
+    "answer": "Klaas"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie heeft de grootste kans om in Lille ineens met een groep onbekenden te staan alsof ze al jaren vrienden zijn?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Wat is pizza in het Frans?",
+    "answer": "Anne"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand zei ooit dat Brabant geen provincie is maar een geloof.",
+    "answer": "Waar",
+    "explain": "Waar. Dit is bijna filosofie.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Wat is het centrum van Spa toch bruisend.",
+    "answer": "Roos"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie gaat het meest doen alsof die de Franse cultuur wil ontdekken, maar bedoelt eigenlijk gewoon kroegen?"
+  },
+  {
+    "type": "person",
+    "prompt": "Wie vroeg of de huizen een beetje bij steden lagen als jullie uit wilden?",
+    "answer": "Anne",
+    "explain": "Anne dacht alvast praktisch aan uitgaan."
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik dacht eigenlijk dus dat paella altijd een broodje was.",
+    "answer": "Pim"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie wordt het snelst boos omdat iedereen weer op hem/haar stemt?"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand dacht ooit dat pizza in het Frans een ingewikkeld ander woord had.",
+    "answer": "Waar",
+    "explain": "Waar. De vraag was letterlijk: ‘Wat is pizza in het Frans?’",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Huilen met de hoofdletter J.",
+    "answer": "Hugo"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie kan het slechtst tegen verliezen, maar noemt dat ‘gewoon competitief zijn’?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik chill altijd als ik slaap.",
+    "answer": "Wouter"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand zei ooit: ‘Een winnaar heb je wanneer iemand wint.’",
+    "answer": "Waar",
+    "explain": "Waar. Technisch gezien waterdicht.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Het ruikt hier naar Groesbeek.",
+    "answer": "Thomas"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie heeft de meeste kans om zondagochtend een verhaal te vertellen waar drie gaten in zitten?"
+  },
+  {
+    "type": "person",
+    "prompt": "Wie appte in de lustrumgroep alleen ‘Bakvet’?",
+    "answer": "Stefan",
+    "explain": "Kort, krachtig, Stefan."
+  },
+  {
+    "type": "quote",
+    "prompt": "Als je de ruimte hebt, moet je de ruimte gebruiken. Dit staat over 20 jaar in mijn boek.",
+    "answer": "Julia"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie gaat het hardst lachen om een grap die eigenlijk niet eens af is?"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand zei ooit dat Lille eigenlijk in Spanje ligt.",
+    "answer": "Leugen",
+    "explain": "Leugen. Zelfs deze groep is niet zó ver heen.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Een winnaar heb je wanneer iemand wint.",
+    "answer": "Pim"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie zou bij een simpele vraag alsnog een vergadering willen starten?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik wil een staande ovatie geven, maar ik heb geen zin om op te staan.",
+    "answer": "Kyo"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand beweerde ooit dat een tankstation een soort nachtclub voor auto’s is.",
+    "answer": "Leugen",
+    "explain": "Leugen. Maar dit had wel in de chat kunnen staan.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Is kreeft een sterrenbeeld?",
+    "answer": "Klaas"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie gaat het meest strategisch stemmen en daarna doen alsof het ‘onderbuikgevoel’ was?"
+  },
+  {
+    "type": "person",
+    "prompt": "Wie reageerde ‘Dat kan niet...’ toen iemand zei dat iets nog vetter was dan Thomas?",
+    "answer": "Thomas",
+    "explain": "Thomas verdedigde zijn eigen vetheid."
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik heb een goeie woorden advies.",
+    "answer": "Anna"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie wordt dit weekend het vaakst geciteerd zonder dat diegene dat wilde?"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand dacht ooit dat de Eiffeltoren in Lille staat.",
+    "answer": "Leugen",
+    "explain": "Leugen. Nog niet aangetroffen in de chat, gelukkig.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Banaan oppaffen.",
+    "answer": "Stefan"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie heeft de grootste kans om precies het verkeerde te zeggen op precies het verkeerde moment?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik heb een hoedenhoofd, geen brillenhoofd.",
+    "answer": "Julia"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand zei ooit dat geserveerde donuts facking gaaf zijn.",
+    "answer": "Waar",
+    "explain": "Waar. Een sterke mening, maar wel een echte.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Ja Brabant is geen provincie maar een geloof.",
+    "answer": "Jasper"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie gaat bij aankomst meteen doen alsof Lille zijn/haar stad is?"
+  },
+  {
+    "type": "person",
+    "prompt": "Wie vroeg hoe duur zo’n busje zou zijn?",
+    "answer": "Chandler",
+    "explain": "Chandler dacht alvast aan vervoer."
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik ben wel blij dat mijn vingers een beetje koud zijn nu, voor mijn hoofd.",
+    "answer": "Wouter"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie is het meest waarschijnlijk om een discussie te winnen puur door harder te praten?"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand dacht ooit dat ‘mental state of mind’ een normale uitdrukking was.",
+    "answer": "Waar",
+    "explain": "Waar. Dubbelop, maar met overtuiging.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik vind kippen die rennen één van de mooiste dingen die bestaan op de wereld.",
+    "answer": "Roos"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie gaat het meest roepen dat de regels niet eerlijk zijn zodra die achter staat?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik weet een grappig grapje, maar weet hem alleen in het Engels.",
+    "answer": "Anne"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand zei ooit dat huilen met een hoofdletter J kan.",
+    "answer": "Waar",
+    "explain": "Waar. Grammatisch discutabel, emotioneel duidelijk.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Wij zouden een vriendengroep moeten starten met écht leuke mensen.",
+    "answer": "Julia"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie wordt door iedereen gekozen bij ‘meest verdacht’, ook als er geen context is?"
+  },
+  {
+    "type": "person",
+    "prompt": "Wie appte ‘Omg hype’ toen de vakantie concreter werd?",
+    "answer": "Anna",
+    "explain": "Anna had de hype te pakken."
+  },
+  {
+    "type": "quote",
+    "prompt": "Wacht, maar hoe verplaatsen auto’s zich?",
+    "answer": "Wouter"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie heeft de meeste ‘laat mij dit maar regelen’-energie met de minste garantie op succes?"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand vroeg ooit of champagne uit Groningen komt.",
+    "answer": "Leugen",
+    "explain": "Leugen. Klinkt als een quote, maar is nep.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik vind geserveerde donuts toch echt wel facking gaaf.",
+    "answer": "Hugo"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie kan van een korte stop een volledige situatie maken?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik moet helemaal niks. Ik bepaal zelf wat ik doe. Ik ben een independent Klaas.",
+    "answer": "Klaas"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand zei ooit dat kippen die rennen één van de mooiste dingen op aarde zijn.",
+    "answer": "Waar",
+    "explain": "Waar. Poëtisch en chaotisch tegelijk.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Mijn leven is zo op orde, ik heb zelfs mijn breakdowns gepland.",
+    "answer": "Julia"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie gaat waarschijnlijk als eerste iets kwijt zijn: telefoon, jas, waardigheid of overzicht?"
+  },
+  {
+    "type": "person",
+    "prompt": "Wie appte ‘ik zeg doen’ bij het boeken?",
+    "answer": "Hugo",
+    "explain": "Hugo gaf groen licht."
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik pak alleen menu omdat de milkshake dan goedkoper is.",
+    "answer": "Kyo"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie is het meest waarschijnlijk om een quote te forceren en daardoor juist geen quote te maken?"
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand beweerde ooit dat je in Frankrijk verplicht met een baguette moet tanken.",
+    "answer": "Leugen",
+    "explain": "Leugen. Nog niet, maar geef het tijd.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Wat is eigenlijk de achternaam van jouw vader?",
+    "answer": "Julia"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie zou een simpele route naar Lille op de een of andere manier emotioneel maken?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Wejow, kei veel bakstenen.",
+    "answer": "Jasper"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik hoef geen accent, doe mij maar gewoon ANWB.",
+    "answer": "Anne"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie heeft de grootste kans om in de auto al te beginnen met ‘dit weekend wordt legendarisch’?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Weet je wat ik nou de echt grootste red flag vind: mensen zoals ik.",
+    "answer": "Julia"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie gaat het meest doen alsof die boven dit spel staat, maar checkt ondertussen continu de stand?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik hou van mansplainen, dan hoef ik zelf niet meer na te denken.",
+    "answer": "Julia"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie is het meest waarschijnlijk om een volledig verzonnen feit met veel zelfvertrouwen te presenteren?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik vind Nijmegen niet per se mooi.",
+    "answer": "Kyo"
+  },
+  {
+    "type": "quote",
+    "prompt": "Het is een mental state of mind.",
+    "answer": "Julia"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie heeft de grootste kans om oprecht gekwetst te zijn door een meerderheid?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Wat is jullie mening over snorren?",
+    "answer": "Pim"
+  },
+  {
+    "type": "most",
+    "prompt": "Wie is in dit spel waarschijnlijk de ‘altijd op stemmen als je het niet weet’-optie?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Hoe spel je Arnhem?",
+    "answer": "Roos"
+  },
+  {
+    "type": "quote",
+    "prompt": "Als je moet schijten maar dan anders? Poepen, en dan vogel? Met de K? Kaketoe.",
+    "answer": "Kyo"
+  },
+  {
+    "type": "quote",
+    "prompt": "Voor iemand die zoveel denkt, zeg je behoorlijk weinig.",
+    "answer": "Hugo"
+  }
 ];

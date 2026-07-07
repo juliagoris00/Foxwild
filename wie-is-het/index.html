@@ -14,46 +14,56 @@
   <div class="bg"></div>
   <main class="app">
     <section id="setup" class="card hero">
-      <div class="pill">🚗 Road to Lille</div>
+      <div class="pill">🚗 Foxwild roadtrip game</div>
       <h1>Wie is het?</h1>
-      <p class="sub">Een competitief “wie van ons?”-spel. Raad niet alleen wie jij vindt, maar vooral wie de meeste auto’s gaan kiezen.</p>
+      <p class="sub"><b>Een snel, competitief spel voor de auto’s richting Lille.</b><br>Elke auto speelt als team. Jullie krijgen 90 seconden per ronde om te overleggen, één antwoord te kiezen en 1, 3 of 5 punten in te zetten. Daarna wordt automatisch onthuld.</p>
       <div class="rules">
-        <div class="rule"><b>1. Vraag</b><div class="meta">De host start een ronde met timer.</div></div>
-        <div class="rule"><b>2. Overleg</b><div class="meta">Elke auto kiest één naam + motivatie.</div></div>
-        <div class="rule"><b>3. Inzet</b><div class="meta">Kies 1, 3 of 5 punten.</div></div>
-        <div class="rule"><b>4. Onthullen</b><div class="meta">Meerderheid goed? Inzet erbij. Fout? Inzet eraf.</div></div>
+        <div class="rule"><b>Most likely</b><div class="meta">Kies wie volgens jullie de meeste stemmen krijgt. De meerderheid levert punten op.</div></div>
+        <div class="rule"><b>Wie zei deze quote?</b><div class="meta">Raad van wie een echte Foxwild-quote kwam. Goed = punten erbij, fout = punten eraf.</div></div>
+        <div class="rule"><b>Waar of leugen?</b><div class="meta">Sommige dingen zijn echt gezegd. Andere klinken alleen alsof dat zo is.</div></div>
+        <div class="rule"><b>Foxwild-feit</b><div class="meta">Korte vragen over dingen uit de groep, zonder gedoe of lange motivatie.</div></div>
       </div>
+      <p class="help"><b>Geen vaste host nodig.</b> Iedereen kan na de onthulling de volgende ronde starten. De aparte spelscherm-link is alleen voor resetten of meekijken.</p>
       <label>Team / auto naam</label>
       <input id="teamName" maxlength="24" placeholder="Bijv. Auto Julia" />
-      <label>Spelers in jullie auto</label>
+      <label>Wie zitten er in jullie auto? <span class="meta">optioneel</span></label>
       <textarea id="carPlayers" placeholder="Bijv. Julia, Bram, Sophie, Tim"></textarea>
-      <button id="joinBtn" class="primary">Start spel</button>
+      <button id="joinBtn" class="primary">Meedoen</button>
       <p id="firebaseWarning" class="warning hidden">Firebase is nog niet gekoppeld. Check js/firebase-config.js.</p>
     </section>
 
     <section id="game" class="hidden">
       <header class="topbar">
         <div>
-          <div class="tiny">Jullie auto</div>
+          <div class="tiny">Jullie team</div>
           <h2 id="teamTitle">-</h2>
         </div>
-        <button id="scoreBtn" class="ghost">🏆 Score</button>
+        <div class="top-actions">
+          <button id="scoreBtn" class="ghost">🏆 Score</button>
+          <button id="helpBtn" class="ghost">ℹ️ Uitleg</button>
+        </div>
       </header>
 
       <section class="card round-card">
-        <div class="round-meta">
-          <span id="roundLabel">Ronde 1</span>
-          <span id="timer" class="timer">--:--</span>
+        <div class="round-meta"><span id="roundLabel">Ronde</span><span id="timer" class="timer">--:--</span></div>
+        <div id="categoryBadge" class="category most">Wachten</div>
+        <h3 id="questionText" class="question">Wacht tot iemand de eerste ronde start...</h3>
+        <p id="roundHelp" class="help">Iedere auto kan de volgende ronde starten zodra de vorige ronde is onthuld.</p>
+        <div class="statusbar">
+          <div class="notice"><span class="tiny">Status</span><strong id="statusText">Wachten</strong></div>
+          <div class="notice"><span class="tiny">Inzendingen</span><strong id="submitCount">0</strong></div>
+          <div class="notice"><span class="tiny">Jullie score</span><strong id="myScore">0</strong></div>
         </div>
-        <h3 id="questionText">Wacht tot de host de ronde start...</h3>
-        <p id="roundHelp" class="help">Kies de persoon waarvan jullie denken dat de meeste auto’s hem/haar kiezen.</p>
+        <button id="startRoundBtn" class="primary alt">Start eerste ronde · 90 sec</button>
       </section>
 
-      <section id="answerCard" class="card">
-        <label>Jullie antwoord</label>
-        <input id="answerInput" maxlength="30" placeholder="Naam uit de groep" />
-        <label>Motivatie / roast</label>
-        <textarea id="reasonInput" maxlength="220" placeholder="Waarom juist deze persoon?"></textarea>
+      <section id="answerCard" class="card hidden">
+        <label id="answerLabel">Kies jullie antwoord</label>
+        <div id="options" class="option-grid"></div>
+        <div id="customWrap" class="hidden">
+          <label>Andere naam</label>
+          <input id="customAnswer" maxlength="30" placeholder="Typ naam" />
+        </div>
         <label>Inzet</label>
         <div class="bets">
           <button class="bet active" data-bet="1">1</button>
@@ -61,23 +71,19 @@
           <button class="bet" data-bet="5">5</button>
         </div>
         <button id="submitBtn" class="primary">Antwoord vastzetten</button>
-        <p id="submitted" class="success hidden">Antwoord opgeslagen. Wacht tot de host onthult.</p>
-        <p id="closed" class="warning hidden">Tijd voorbij. Wacht op de volgende ronde.</p>
+        <p id="submitted" class="success hidden">Antwoord opgeslagen. Je mag nog aanpassen zolang de timer loopt.</p>
+        <p id="closed" class="warning hidden">Tijd voorbij. De uitslag wordt automatisch onthuld.</p>
       </section>
 
       <section class="card">
-        <h3>Antwoorden deze ronde</h3>
+        <h3>Antwoorden</h3>
+        <div id="resultSummary" class="notice hidden"></div>
         <div id="answersList" class="answers"></div>
       </section>
     </section>
 
-    <section id="leaderboardPanel" class="drawer hidden">
-      <div class="drawer-inner">
-        <button id="closeScore" class="ghost close">Sluiten</button>
-        <h2>🏆 Live scorebord</h2>
-        <div id="leaderboard"></div>
-      </div>
-    </section>
+    <section id="leaderboardPanel" class="drawer hidden"><div class="drawer-inner"><button id="closeScore" class="ghost close">Sluiten</button><h2>🏆 Live scorebord</h2><div id="leaderboard"></div></div></section>
+    <section id="helpPanel" class="drawer hidden"><div class="drawer-inner"><button id="closeHelp" class="ghost close">Sluiten</button><h2>Zo werkt Wie is het?</h2><p class="help">Je speelt per auto. Elke ronde heeft een ander soort vraag. Jullie overleggen kort, kiezen één antwoord en zetten 1, 3 of 5 punten in. Na 90 seconden wordt alles automatisch onthuld en verwerkt in het scorebord.</p><div class="rules"><div class="rule"><b>Most likely</b><div class="meta">Je probeert te voorspellen wie de meeste auto’s kiezen. Zit je in de duidelijke meerderheid, dan krijg je je inzet erbij. Zit je ernaast, dan gaat je inzet eraf.</div></div><div class="rule"><b>Quote / feit / waar-leugen</b><div class="meta">Daar is één goed antwoord. Goed = inzet erbij. Fout = inzet eraf.</div></div><div class="rule"><b>Gelijke stand</b><div class="meta">Bij Most likely levert een gelijke stand niets op. Als iedereen hetzelfde kiest, is het te makkelijk en krijgt iedereen maar +1.</div></div><div class="rule"><b>Geen motivatie</b><div class="meta">Niet typen, niet uitleggen. Gewoon kiezen, inzetten, onthullen en door.</div></div></div></div></section>
   </main>
   <script src="js/game.js"></script>
 </body>

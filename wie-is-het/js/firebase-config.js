@@ -9,5 +9,6 @@ window.firebaseConfig = {
   measurementId: "G-RCJ4736W5V"
 };
 
-window.RUMBLE_GAME_ID = "wie-is-het-2026";
-window.RUMBLE_ADMIN_CODE = "LILLE2026";
+window.WIE_IS_HET_GAME_ID = "wie-is-het-2026";
+window.WIE_IS_HET_ADMIN_CODE = "LILLE2026";
+window.WIE_IS_HET_ROUND_SECONDS = 90;

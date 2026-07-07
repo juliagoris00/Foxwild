@@ -1,16 +1,51 @@
-# Foxwild - Wie is het?
+# Foxwild · Wie is het?
 
-Deze versie bevat alleen het autospel **Wie is het?**. De bingo staat niet in dit pakket, zodat niemand daar al bij kan.
+Nieuwe versie zonder bingo. Dit spel bestaat uit:
+
+- Most likely-vragen
+- Wie zei deze quote?
+- Waar of leugen?
+- Foxwild-feitjes
+- 90 seconden per ronde
+- Geen motivatie of extra tekst
+- Inzetknoppen: 1, 3 of 5 punten
+- Live scorebord via Firebase
+
+## Uploaden naar GitHub
+
+Upload de inhoud van deze map naar je repository `Foxwild`.
+
+Uiteindelijk moet je in GitHub zien:
+
+```text
+index.html
+README.md
+wie-is-het/
+```
 
 ## Links
 
-- Spel: `/wie-is-het/`
-- Host: `/wie-is-het/admin.html`
-- Hostcode: `LILLE2026`
+Spel:
+
+```text
+https://juliagoris00.github.io/Foxwild/wie-is-het/
+```
+
+Optioneel spelscherm:
+
+```text
+https://juliagoris00.github.io/Foxwild/wie-is-het/admin.html
+```
+
+Hostcode:
+
+```text
+LILLE2026
+```
 
 ## Firebase Rules
 
-Zet in Firebase → Realtime Database → Rules:
+Gebruik deze rules in Firebase Realtime Database:
 
 ```json
 {
@@ -25,14 +60,6 @@ Zet in Firebase → Realtime Database → Rules:
 }
 ```
 
-Klik daarna op **Publish**.
+## Schoon beginnen
 
-## Uploaden naar GitHub
-
-Upload de inhoud van deze map naar je repository. Dus upload:
-
-- `index.html`
-- `README.md`
-- `wie-is-het/`
-
-Niet alleen de zip uploaden.
+Open het optionele spelscherm en klik één keer op **Reset spel** voordat jullie beginnen.
