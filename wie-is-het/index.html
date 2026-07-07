@@ -14,21 +14,21 @@
   <div class="bg"></div>
   <main class="app">
     <section id="setup" class="card hero">
-      <div class="pill">🚗 Foxwild roadtrip game</div>
-      <h1>Wie is het?</h1>
-      <p class="sub"><b>Een snel, competitief spel voor de auto’s richting Lille.</b><br>Elke auto speelt als team. Jullie krijgen 90 seconden per ronde om te overleggen, één antwoord te kiezen en 1, 3 of 5 punten in te zetten. Daarna wordt automatisch onthuld.</p>
+      <div class="pill">Foxwild roadtrip game 🚗 </div>
+      <h1>Quiz!</h1>
+      <p class="sub"><b>Voor onderweg</b><br>Elke auto speelt als team. Jullie krijgen 40 seconden per ronde om te overleggen, één antwoord te kiezen en 1, 3 of 5 punten in te zetten. Daarna wordt het goede antwoord onthuld.</p>
       <div class="rules">
-        <div class="rule"><b>Most likely</b><div class="meta">Kies wie volgens jullie de meeste stemmen krijgt. De meerderheid levert punten op.</div></div>
-        <div class="rule"><b>Wie zei deze quote?</b><div class="meta">Raad van wie een echte Foxwild-quote kwam. Goed = punten erbij, fout = punten eraf.</div></div>
-        <div class="rule"><b>Waar of leugen?</b><div class="meta">Sommige dingen zijn echt gezegd. Andere klinken alleen alsof dat zo is.</div></div>
-        <div class="rule"><b>Foxwild-feit</b><div class="meta">Korte vragen over dingen uit de groep, zonder gedoe of lange motivatie.</div></div>
+        <div class="rule"><b>Wie is het?</b><div class="meta">Kies wie volgens jullie de meeste stemmen zal krijgen.</div></div>
+        <div class="rule"><b>Wie zei het?</b><div class="meta">Raad van wie de quote is. Heb je het goed = punten erbij, fout = punten eraf.</div></div>
+        <div class="rule"><b>Waarheid of leugen?</b><div class="meta">Sommige dingen zijn echt gezegd/gebeurd. Andere klinken alleen alsof dat zo is.</div></div>
+        <div class="rule"><b>Foxwild-kennis</b><div class="meta">Kennis vragen over elkaar.</div></div>
       </div>
-      <p class="help"><b>Geen vaste host nodig.</b> Iedereen kan na de onthulling de volgende ronde starten. De aparte spelscherm-link is alleen voor resetten of meekijken.</p>
+      <p class="help"><b>Spel kan per auto of ieder voor zich</b> Iedereen kan na de onthulling de volgende ronde starten. De aparte spelscherm-link is alleen voor resetten of meekijken.</p>
       <label>Team / auto naam</label>
       <input id="teamName" maxlength="24" placeholder="Bijv. Auto Julia" />
       <label>Wie zitten er in jullie auto? <span class="meta">optioneel</span></label>
       <textarea id="carPlayers" placeholder="Bijv. Julia, Bram, Sophie, Tim"></textarea>
-      <button id="joinBtn" class="primary">Meedoen</button>
+      <button id="joinBtn" class="primary">START</button>
       <p id="firebaseWarning" class="warning hidden">Firebase is nog niet gekoppeld. Check js/firebase-config.js.</p>
     </section>
 
@@ -54,7 +54,7 @@
           <div class="notice"><span class="tiny">Inzendingen</span><strong id="submitCount">0</strong></div>
           <div class="notice"><span class="tiny">Jullie score</span><strong id="myScore">0</strong></div>
         </div>
-        <button id="startRoundBtn" class="primary alt">Start eerste ronde · 90 sec</button>
+        <button id="startRoundBtn" class="primary alt">Start eerste ronde · 40 sec</button>
       </section>
 
       <section id="answerCard" class="card hidden">
@@ -64,7 +64,7 @@
           <label>Andere naam</label>
           <input id="customAnswer" maxlength="30" placeholder="Typ naam" />
         </div>
-        <label>Inzet</label>
+        <label>Inzet (hoe zeker ben je van je antwoord?)</label>
         <div class="bets">
           <button class="bet active" data-bet="1">1</button>
           <button class="bet" data-bet="3">3</button>
