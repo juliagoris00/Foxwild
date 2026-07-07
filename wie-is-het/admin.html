@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wie is het? Host</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/questions.js"></script>
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="app">
+    <section id="login" class="card hero">
+      <div class="pill">👑 Host</div>
+      <h1>Wie is het? Host</h1>
+      <p class="sub">Start rondes, zet een tijdlimiet, onthul antwoorden en geef bonuspunten voor de beste motivatie.</p>
+      <label>Hostcode</label>
+      <input id="code" placeholder="Hostcode" />
+      <button id="loginBtn" class="primary">Open hostpaneel</button>
+      <p class="help">Standaard hostcode: LILLE2026</p>
+    </section>
+
+    <section id="host" class="hidden">
+      <header class="topbar">
+        <div>
+          <div class="tiny">Hostpaneel</div>
+          <h2>Wie is het?</h2>
+        </div>
+        <button id="resetBtn" class="danger">Reset spel</button>
+      </header>
+
+      <section class="card">
+        <h3>Uitleg voor de groep</h3>
+        <p class="help">Elke auto probeert te voorspellen welk antwoord de meerderheid kiest. Goed = inzet erbij. Fout = inzet eraf. Als iedereen hetzelfde kiest, krijgt iedereen maar 1 punt: veilig spelen wordt dus minder beloond.</p>
+      </section>
+
+      <section class="card">
+        <div class="round-meta"><span id="hostRoundLabel">Ronde</span><span id="hostTimer" class="timer">--:--</span></div>
+        <h3 id="hostQuestion">Vraag</h3>
+        <label>Tijdlimiet</label>
+        <select id="durationSelect">
+          <option value="45">45 seconden</option>
+          <option value="60" selected>60 seconden</option>
+          <option value="90">90 seconden</option>
+          <option value="120">120 seconden</option>
+        </select>
+        <div class="row">
+          <button id="prevBtn" class="ghost">← Vorige vraag</button>
+          <button id="nextBtn" class="primary">Start volgende ronde →</button>
+        </div>
+        <button id="restartTimerBtn" class="ghost">Timer opnieuw starten voor deze ronde</button>
+        <button id="revealBtn" class="primary alt">Onthul + bereken punten</button>
+        <p class="help">Laat elke auto binnen de tijd antwoord + inzet invullen. Daarna onthullen.</p>
+      </section>
+
+      <section class="card">
+        <h3>Inzendingen</h3>
+        <div id="hostAnswers" class="answers"></div>
+      </section>
+
+      <section class="card">
+        <h3>Bonuspunten geven</h3>
+        <p class="help">Bijvoorbeeld voor beste motivatie, hardste roast of perfecte groepsinschatting.</p>
+        <div id="bonusList"></div>
+      </section>
+
+      <section class="card">
+        <h3>Scorebord</h3>
+        <div id="hostLeaderboard"></div>
+      </section>
+    </section>
+  </main>
+  <script src="js/admin.js"></script>
+</body>
+</html>

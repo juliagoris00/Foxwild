@@ -1,29 +1,38 @@
-# Lille Games
+# Foxwild - Wie is het?
 
-Deze repository bevat twee losse spellen:
+Deze versie bevat alleen het autospel **Wie is het?**. De bingo staat niet in dit pakket, zodat niemand daar al bij kan.
 
-- `/bingo/` — Lille Bar Crawl Bingo
-- `/rumble/` — Rijsel Rumble autospel
+## Links
 
-Firebase Realtime Database rules:
+- Spel: `/wie-is-het/`
+- Host: `/wie-is-het/admin.html`
+- Hostcode: `LILLE2026`
+
+## Firebase Rules
+
+Zet in Firebase → Realtime Database → Rules:
 
 ```json
 {
   "rules": {
     "games": {
-      "lille-barcrawl-2026": { ".read": true, ".write": true },
-      "rijsel-rumble-2026": { ".read": true, ".write": true }
+      "wie-is-het-2026": {
+        ".read": true,
+        ".write": true
+      }
     }
   }
 }
 ```
 
-Links op GitHub Pages:
+Klik daarna op **Publish**.
 
-- Hoofdmenu: `https://juliagoris00.github.io/Pubcrawl/`
-- Bingo: `https://juliagoris00.github.io/Pubcrawl/bingo/`
-- Bingo host: `https://juliagoris00.github.io/Pubcrawl/bingo/admin.html`
-- Rumble: `https://juliagoris00.github.io/Pubcrawl/rumble/`
-- Rumble host: `https://juliagoris00.github.io/Pubcrawl/rumble/admin.html`
+## Uploaden naar GitHub
 
-Hostcode: `LILLE2026`
+Upload de inhoud van deze map naar je repository. Dus upload:
+
+- `index.html`
+- `README.md`
+- `wie-is-het/`
+
+Niet alleen de zip uploaden.

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wie is het?</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/questions.js"></script>
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="app">
+    <section id="setup" class="card hero">
+      <div class="pill">🚗 Road to Lille</div>
+      <h1>Wie is het?</h1>
+      <p class="sub">Een competitief “wie van ons?”-spel. Raad niet alleen wie jij vindt, maar vooral wie de meeste auto’s gaan kiezen.</p>
+      <div class="rules">
+        <div class="rule"><b>1. Vraag</b><div class="meta">De host start een ronde met timer.</div></div>
+        <div class="rule"><b>2. Overleg</b><div class="meta">Elke auto kiest één naam + motivatie.</div></div>
+        <div class="rule"><b>3. Inzet</b><div class="meta">Kies 1, 3 of 5 punten.</div></div>
+        <div class="rule"><b>4. Onthullen</b><div class="meta">Meerderheid goed? Inzet erbij. Fout? Inzet eraf.</div></div>
+      </div>
+      <label>Team / auto naam</label>
+      <input id="teamName" maxlength="24" placeholder="Bijv. Auto Julia" />
+      <label>Spelers in jullie auto</label>
+      <textarea id="carPlayers" placeholder="Bijv. Julia, Bram, Sophie, Tim"></textarea>
+      <button id="joinBtn" class="primary">Start spel</button>
+      <p id="firebaseWarning" class="warning hidden">Firebase is nog niet gekoppeld. Check js/firebase-config.js.</p>
+    </section>
+
+    <section id="game" class="hidden">
+      <header class="topbar">
+        <div>
+          <div class="tiny">Jullie auto</div>
+          <h2 id="teamTitle">-</h2>
+        </div>
+        <button id="scoreBtn" class="ghost">🏆 Score</button>
+      </header>
+
+      <section class="card round-card">
+        <div class="round-meta">
+          <span id="roundLabel">Ronde 1</span>
+          <span id="timer" class="timer">--:--</span>
+        </div>
+        <h3 id="questionText">Wacht tot de host de ronde start...</h3>
+        <p id="roundHelp" class="help">Kies de persoon waarvan jullie denken dat de meeste auto’s hem/haar kiezen.</p>
+      </section>
+
+      <section id="answerCard" class="card">
+        <label>Jullie antwoord</label>
+        <input id="answerInput" maxlength="30" placeholder="Naam uit de groep" />
+        <label>Motivatie / roast</label>
+        <textarea id="reasonInput" maxlength="220" placeholder="Waarom juist deze persoon?"></textarea>
+        <label>Inzet</label>
+        <div class="bets">
+          <button class="bet active" data-bet="1">1</button>
+          <button class="bet" data-bet="3">3</button>
+          <button class="bet" data-bet="5">5</button>
+        </div>
+        <button id="submitBtn" class="primary">Antwoord vastzetten</button>
+        <p id="submitted" class="success hidden">Antwoord opgeslagen. Wacht tot de host onthult.</p>
+        <p id="closed" class="warning hidden">Tijd voorbij. Wacht op de volgende ronde.</p>
+      </section>
+
+      <section class="card">
+        <h3>Antwoorden deze ronde</h3>
+        <div id="answersList" class="answers"></div>
+      </section>
+    </section>
+
+    <section id="leaderboardPanel" class="drawer hidden">
+      <div class="drawer-inner">
+        <button id="closeScore" class="ghost close">Sluiten</button>
+        <h2>🏆 Live scorebord</h2>
+        <div id="leaderboard"></div>
+      </div>
+    </section>
+  </main>
+  <script src="js/game.js"></script>
+</body>
+</html>
