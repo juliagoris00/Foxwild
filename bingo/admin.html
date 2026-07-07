@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Host | Lille Bar Crawl Bingo</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="bg-orbs" aria-hidden="true"><span></span><span></span><span></span></div>
+  <main class="app-shell">
+    <section class="hero-card admin-card">
+      <div class="badge">👑 Host dashboard</div>
+      <h1>Admin</h1>
+      <p class="sub">Bekijk de spelers live en reset het spel wanneer nodig.</p>
+
+      <form id="adminLogin" class="join-form">
+        <label for="adminCode">Hostcode</label>
+        <input id="adminCode" placeholder="Hostcode" autocomplete="off" />
+        <button class="primary" type="submit">Open dashboard</button>
+      </form>
+
+      <section id="adminPanel" class="hidden">
+        <div class="status-pill" id="adminStatus">Verbonden…</div>
+        <div class="section-head">
+          <h3>Spelers</h3>
+          <span id="adminPlayerCount">0 spelers</span>
+        </div>
+        <ol id="adminLeaderboard" class="leaderboard"></ol>
+
+        <div class="button-row admin-actions">
+          <button id="resetGameBtn" class="ghost danger">Reset heel spel</button>
+          <button id="downloadScoresBtn" class="ghost">Download scores</button>
+        </div>
+      </section>
+
+      <a class="admin-link" href="index.html">Terug naar spel</a>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/tasks.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
