@@ -16,7 +16,6 @@ window.WIE_IS_HET_PLAYERS = [
   "Jacob",
   "Toon",
   "Teun",
-  "Tessa"
 ];
 
 window.WIE_IS_HET_QUESTIONS = [
