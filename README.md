@@ -6,7 +6,7 @@ Nieuwe versie zonder bingo. Dit spel bestaat uit:
 - Wie zei deze quote?
 - Waar of leugen?
 - Foxwild-feitjes
-- 90 seconden per ronde
+- 40 seconden per ronde
 - Geen motivatie of extra tekst
 - Inzetknoppen: 1, 3 of 5 punten
 - Live scorebord via Firebase
@@ -63,3 +63,14 @@ Gebruik deze rules in Firebase Realtime Database:
 ## Schoon beginnen
 
 Open het optionele spelscherm en klik één keer op **Reset spel** voordat jullie beginnen.
+
+
+## v5 wijzigingen
+- Foxwild-kennisvragen vervangen door leukere groepsstatistieken.
+- Waar/leugen-vragen zijn nu ongeveer in balans.
+- Sommige quotevragen hebben “Dit is nooit gezegd” als juist antwoord.
+- Motivatie blijft volledig weg: alleen kiezen + inzet.
+
+
+## Vragenvolgorde
+Elke reset maakt automatisch een nieuwe willekeurige volgorde van de vragen. Daardoor krijg je bij opnieuw spelen niet dezelfde vaste volgorde.

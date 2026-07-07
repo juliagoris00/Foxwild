@@ -16,6 +16,7 @@ window.WIE_IS_HET_PLAYERS = [
   "Jacob",
   "Toon",
   "Teun",
+  "Tessa"
 ];
 
 window.WIE_IS_HET_QUESTIONS = [
@@ -54,6 +55,103 @@ window.WIE_IS_HET_QUESTIONS = [
     "explain": "Volgens de WhatsApp-export werd de groep door Jasper aangemaakt."
   },
   {
+    "type": "person",
+    "prompt": "Wie maakte de quotegroep QUOTES!!! aan?",
+    "answer": "Anna",
+    "explain": "Volgens de WhatsApp-export werd de quotegroep door Anna gemaakt.",
+    "options": [
+      "Anna",
+      "Roos",
+      "Julia",
+      "Kyo"
+    ]
+  },
+  {
+    "type": "person",
+    "prompt": "Wie stuurde de meeste berichten in de lustrumgroep?",
+    "answer": "Chandler",
+    "explain": "Chandler staat bovenaan met 1.327 tekstberichten.",
+    "options": [
+      "Chandler",
+      "Hugo",
+      "Jasper",
+      "Roos"
+    ]
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik ben niet verdwaald, ik ben aan het herpositioneren.",
+    "answer": "Dit is nooit gezegd"
+  },
+  {
+    "type": "person",
+    "prompt": "Wie stuurde de minste berichten in de lustrumgroep?",
+    "answer": "Tessa",
+    "explain": "Tessa staat onderaan met 1 tekstbericht in de export.",
+    "options": [
+      "Tessa",
+      "Teun",
+      "Jacob",
+      "Toon"
+    ]
+  },
+  {
+    "type": "person",
+    "prompt": "Wie staat na Chandler op plek 2 qua meeste berichten in de lustrumgroep?",
+    "answer": "Hugo",
+    "explain": "Hugo staat tweede met 605 tekstberichten.",
+    "options": [
+      "Hugo",
+      "Jasper",
+      "Roos",
+      "Floris"
+    ]
+  },
+  {
+    "type": "truth",
+    "prompt": "Iemand vroeg ooit of Lille eigenlijk in Luxemburg ligt.",
+    "answer": "Leugen",
+    "explain": "Leugen. Klinkt mogelijk, maar staat niet in de export.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "person",
+    "prompt": "Wie stuurde de meeste berichten in de QUOTES!!!-groep?",
+    "answer": "Roos",
+    "explain": "Roos staat bovenaan in de quotegroep met 110 tekstberichten.",
+    "options": [
+      "Roos",
+      "Anna",
+      "Kyo",
+      "Floris"
+    ]
+  },
+  {
+    "type": "person",
+    "prompt": "Wie had in de lustrumgroep nét meer berichten dan Thomas?",
+    "answer": "Floris",
+    "explain": "Floris had 423 en Thomas 421. Belachelijk dichtbij.",
+    "options": [
+      "Floris",
+      "Roos",
+      "Stefan",
+      "Anna"
+    ]
+  },
+  {
+    "type": "person",
+    "prompt": "Wie had in de lustrumgroep meer berichten: Jasper of Roos?",
+    "answer": "Jasper",
+    "explain": "Jasper had 452, Roos 431.",
+    "options": [
+      "Jasper",
+      "Roos"
+    ]
+  },
+  {
     "type": "quote",
     "prompt": "Iets anders dan een quote in de quote groep sturen is een bak.",
     "answer": "Roos"
@@ -61,6 +159,11 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "most",
     "prompt": "Wie gaat dit spel veel te serieus nemen en daarna zeggen dat het ‘maar een spelletje’ is?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Frans is gewoon Nederlands met meer zelfvertrouwen.",
+    "answer": "Dit is nooit gezegd"
   },
   {
     "type": "truth",
@@ -88,6 +191,16 @@ window.WIE_IS_HET_QUESTIONS = [
   },
   {
     "type": "truth",
+    "prompt": "Iemand zei ooit dat Airbnb staat voor Auto, Bier en Baguette.",
+    "answer": "Leugen",
+    "explain": "Leugen. Helaas niet echt gezegd.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
+    "type": "truth",
     "prompt": "Iemand dacht ooit dat paella altijd een broodje was.",
     "answer": "Waar",
     "explain": "Waar. Culinaire zekerheid was die dag ver te zoeken.",
@@ -106,12 +219,6 @@ window.WIE_IS_HET_QUESTIONS = [
     "prompt": "Wie is de veiligste keuze bij elke vraag waarin drank, verdwalen of slechte beslissingen voorkomen?"
   },
   {
-    "type": "person",
-    "prompt": "Wie stuurde de eerste grote rits Airbnb-links in de lustrumgroep?",
-    "answer": "Jasper",
-    "explain": "De vakantieplanning begon duidelijk met Jasper in regelmodus."
-  },
-  {
     "type": "quote",
     "prompt": "De enige quote die ik ken is de Quote 500.",
     "answer": "Klaas"
@@ -119,6 +226,11 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "most",
     "prompt": "Wie zou het meest overtuigend iets uitleggen dat compleet nergens op slaat?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik heb geen kater, mijn hoofd is gewoon aan het laden.",
+    "answer": "Dit is nooit gezegd"
   },
   {
     "type": "truth",
@@ -155,6 +267,16 @@ window.WIE_IS_HET_QUESTIONS = [
     ]
   },
   {
+    "type": "truth",
+    "prompt": "Iemand vroeg ooit of je met Google Maps ook binnen kroegen kunt navigeren.",
+    "answer": "Leugen",
+    "explain": "Leugen. Had gekund, maar nope.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
     "type": "quote",
     "prompt": "Wat is het centrum van Spa toch bruisend.",
     "answer": "Roos"
@@ -164,12 +286,6 @@ window.WIE_IS_HET_QUESTIONS = [
     "prompt": "Wie gaat het meest doen alsof die de Franse cultuur wil ontdekken, maar bedoelt eigenlijk gewoon kroegen?"
   },
   {
-    "type": "person",
-    "prompt": "Wie vroeg of de huizen een beetje bij steden lagen als jullie uit wilden?",
-    "answer": "Anne",
-    "explain": "Anne dacht alvast praktisch aan uitgaan."
-  },
-  {
     "type": "quote",
     "prompt": "Ik dacht eigenlijk dus dat paella altijd een broodje was.",
     "answer": "Pim"
@@ -177,6 +293,11 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "most",
     "prompt": "Wie wordt het snelst boos omdat iedereen weer op hem/haar stemt?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Een tankstation is eigenlijk een afterparty met tl-licht.",
+    "answer": "Dit is nooit gezegd"
   },
   {
     "type": "truth",
@@ -218,14 +339,18 @@ window.WIE_IS_HET_QUESTIONS = [
     "answer": "Thomas"
   },
   {
-    "type": "most",
-    "prompt": "Wie heeft de meeste kans om zondagochtend een verhaal te vertellen waar drie gaten in zitten?"
+    "type": "truth",
+    "prompt": "Iemand zei ooit dat een busje gewoon een Airbnb op wielen is.",
+    "answer": "Leugen",
+    "explain": "Leugen. Niet teruggevonden in de chats.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
   },
   {
-    "type": "person",
-    "prompt": "Wie appte in de lustrumgroep alleen ‘Bakvet’?",
-    "answer": "Stefan",
-    "explain": "Kort, krachtig, Stefan."
+    "type": "most",
+    "prompt": "Wie heeft de meeste kans om zondagochtend een verhaal te vertellen waar drie gaten in zitten?"
   },
   {
     "type": "quote",
@@ -235,6 +360,11 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "most",
     "prompt": "Wie gaat het hardst lachen om een grap die eigenlijk niet eens af is?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik ben niet te laat, ik kom dramatisch binnen.",
+    "answer": "Dit is nooit gezegd"
   },
   {
     "type": "truth",
@@ -280,10 +410,14 @@ window.WIE_IS_HET_QUESTIONS = [
     "prompt": "Wie gaat het meest strategisch stemmen en daarna doen alsof het ‘onderbuikgevoel’ was?"
   },
   {
-    "type": "person",
-    "prompt": "Wie reageerde ‘Dat kan niet...’ toen iemand zei dat iets nog vetter was dan Thomas?",
-    "answer": "Thomas",
-    "explain": "Thomas verdedigde zijn eigen vetheid."
+    "type": "truth",
+    "prompt": "Iemand dacht ooit dat tol betalen alleen geldt als je langzaam rijdt.",
+    "answer": "Leugen",
+    "explain": "Leugen. Dit is nep, maar wel in de juiste sfeer.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
   },
   {
     "type": "quote",
@@ -293,6 +427,11 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "most",
     "prompt": "Wie wordt dit weekend het vaakst geciteerd zonder dat diegene dat wilde?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Als niemand mij begrijpt, ligt dat ook een beetje aan de groep.",
+    "answer": "Dit is nooit gezegd"
   },
   {
     "type": "truth",
@@ -338,19 +477,28 @@ window.WIE_IS_HET_QUESTIONS = [
     "prompt": "Wie gaat bij aankomst meteen doen alsof Lille zijn/haar stad is?"
   },
   {
-    "type": "person",
-    "prompt": "Wie vroeg hoe duur zo’n busje zou zijn?",
-    "answer": "Chandler",
-    "explain": "Chandler dacht alvast aan vervoer."
-  },
-  {
     "type": "quote",
     "prompt": "Ik ben wel blij dat mijn vingers een beetje koud zijn nu, voor mijn hoofd.",
     "answer": "Wouter"
   },
   {
+    "type": "truth",
+    "prompt": "Iemand zei ooit dat een croissant eigenlijk gewoon een Franse frikandelbroodje-vibe heeft.",
+    "answer": "Leugen",
+    "explain": "Leugen. Klinkt als Foxwild, maar is verzonnen.",
+    "options": [
+      "Waar",
+      "Leugen"
+    ]
+  },
+  {
     "type": "most",
     "prompt": "Wie is het meest waarschijnlijk om een discussie te winnen puur door harder te praten?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Een slechte beslissing is ook gewoon een herinnering met haast.",
+    "answer": "Dit is nooit gezegd"
   },
   {
     "type": "truth",
@@ -396,12 +544,6 @@ window.WIE_IS_HET_QUESTIONS = [
     "prompt": "Wie wordt door iedereen gekozen bij ‘meest verdacht’, ook als er geen context is?"
   },
   {
-    "type": "person",
-    "prompt": "Wie appte ‘Omg hype’ toen de vakantie concreter werd?",
-    "answer": "Anna",
-    "explain": "Anna had de hype te pakken."
-  },
-  {
     "type": "quote",
     "prompt": "Wacht, maar hoe verplaatsen auto’s zich?",
     "answer": "Wouter"
@@ -409,6 +551,11 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "most",
     "prompt": "Wie heeft de meeste ‘laat mij dit maar regelen’-energie met de minste garantie op succes?"
+  },
+  {
+    "type": "quote",
+    "prompt": "Ik drink niet snel, de tijd gaat gewoon langzaam.",
+    "answer": "Dit is nooit gezegd"
   },
   {
     "type": "truth",
@@ -452,12 +599,6 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "most",
     "prompt": "Wie gaat waarschijnlijk als eerste iets kwijt zijn: telefoon, jas, waardigheid of overzicht?"
-  },
-  {
-    "type": "person",
-    "prompt": "Wie appte ‘ik zeg doen’ bij het boeken?",
-    "answer": "Hugo",
-    "explain": "Hugo gaf groen licht."
   },
   {
     "type": "quote",

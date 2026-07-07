@@ -16,7 +16,22 @@
   const esc=s=>String(s||'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));
   const norm=s=>String(s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
   const hash=s=>{let h=0; for(const ch of String(s)){h=(h*31+ch.charCodeAt(0))>>>0;} return h;};
-  function qFor(i){return questions[((i||0)%questions.length+questions.length)%questions.length];}
+  function makeOrder(){
+    const arr=Array.from({length:questions.length},(_,i)=>i);
+    for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+    return arr;
+  }
+  function indexFromState(s,i){
+    const order=Array.isArray(s&&s.questionOrder)?s.questionOrder:null;
+    if(order&&order.length){return order[((i||0)%order.length+order.length)%order.length];}
+    return ((i||0)%questions.length+questions.length)%questions.length;
+  }
+  function qIndexFor(i){
+    const r=rounds[String(i)]||rounds[i]||{};
+    if(Number.isInteger(r.questionIndex)) return r.questionIndex;
+    return indexFromState(state,i);
+  }
+  function qFor(i){return questions[qIndexFor(i)]||questions[0];}
   function typeLabel(q){return q.type==='quote'?'Wie zei deze quote?':q.type==='truth'?'Waar of leugen?':q.type==='person'?'Foxwild-feit':'Most likely';}
   function typeClass(q){return q.type==='quote'?'quote':q.type==='truth'?'truth':q.type==='person'?'person':'most';}
   function helpFor(q){
@@ -64,7 +79,7 @@
     $('questionText').textContent=q.prompt; $('roundHelp').textContent=state.round>=0?helpFor(q):'Iedere auto kan de eerste ronde starten.';
     $('statusText').textContent=currentStatus();
     $('startRoundBtn').classList.toggle('hidden', active);
-    $('startRoundBtn').textContent=state.round<0?'Start eerste ronde · 90 sec':'Start volgende ronde · 90 sec';
+    $('startRoundBtn').textContent=state.round<0?`Start eerste ronde · ${ROUND_SECONDS} sec`:`Start volgende ronde · ${ROUND_SECONDS} sec`;
     $('answerCard').classList.toggle('hidden', waiting||revealed);
     $('answerCard').classList.toggle('disabled', !active||timeLeft()===0);
     $('submitBtn').disabled=!active||timeLeft()===0;
@@ -85,7 +100,19 @@
   async function startNextRound(){
     if(!firebaseReady)return alert('Firebase is nog niet gekoppeld.');
     const ref=base.child('state');
-    ref.transaction(s=>{s=s||{round:-1,status:'waiting'}; if(s.status==='active') return; const next=(typeof s.round==='number'&&s.round>=0&&s.status!=='waiting')?s.round+1:0; return {round:next,status:'active',startedAt:Date.now(),duration:ROUND_SECONDS};}, async(err,committed,snap)=>{if(err)return alert('Starten lukte niet: '+err.message); if(committed&&snap&&snap.val()){const s=snap.val(); await base.child('rounds/'+s.round).update({questionIndex:s.round%questions.length,startedAt:s.startedAt,type:qFor(s.round).type});}});
+    ref.transaction(s=>{
+      s=s||{round:-1,status:'waiting'};
+      if(s.status==='active') return;
+      const next=(typeof s.round==='number'&&s.round>=0&&s.status!=='waiting')?s.round+1:0;
+      if(!Array.isArray(s.questionOrder)||s.questionOrder.length!==questions.length){s.questionOrder=makeOrder();s.shuffleSeed=Date.now();}
+      return {...s,round:next,status:'active',startedAt:Date.now(),duration:ROUND_SECONDS};
+    }, async(err,committed,snap)=>{
+      if(err)return alert('Starten lukte niet: '+err.message);
+      if(committed&&snap&&snap.val()){
+        const s=snap.val(); const idx=indexFromState(s,s.round); const q=questions[idx]||questions[0];
+        await base.child('rounds/'+s.round).update({questionIndex:idx,startedAt:s.startedAt,type:q.type});
+      }
+    });
   }
   async function finalizeRound(roundNo){if(!firebaseReady||roundNo<0)return; finalizeBusy=true; const lockRef=base.child('rounds/'+roundNo+'/scoreLock'); lockRef.transaction(v=>v?undefined:teamId,async(err,committed)=>{if(err||!committed){finalizeBusy=false;return;} try{await calculateAndReveal(roundNo);}finally{finalizeBusy=false;}});}
   async function calculateAndReveal(roundNo){
