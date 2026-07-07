@@ -14,8 +14,7 @@ window.WIE_IS_HET_PLAYERS = [
   "Wouter",
   "Chandler",
   "Jacob",
-  "Toon",
-  "Teun",
+  "Toon"
 ];
 
 window.WIE_IS_HET_QUESTIONS = [
@@ -81,18 +80,6 @@ window.WIE_IS_HET_QUESTIONS = [
     "type": "quote",
     "prompt": "Ik ben niet verdwaald, ik ben aan het herpositioneren.",
     "answer": "Dit is nooit gezegd"
-  },
-  {
-    "type": "person",
-    "prompt": "Wie stuurde de minste berichten in de lustrumgroep?",
-    "answer": "Tessa",
-    "explain": "Tessa staat onderaan met 1 tekstbericht in de export.",
-    "options": [
-      "Tessa",
-      "Teun",
-      "Jacob",
-      "Toon"
-    ]
   },
   {
     "type": "person",

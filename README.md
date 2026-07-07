@@ -72,5 +72,8 @@ Open het optionele spelscherm en klik één keer op **Reset spel** voordat julli
 - Motivatie blijft volledig weg: alleen kiezen + inzet.
 
 
-## Vragenvolgorde
-Elke reset maakt automatisch een nieuwe willekeurige volgorde van de vragen. Daardoor krijg je bij opnieuw spelen niet dezelfde vaste volgorde.
+## v7 wijzigingen
+- De twee niet-meespelende personen zijn uit de spelerslijst verwijderd.
+- Vragen/antwoorden waarin zij voorkwamen zijn verwijderd.
+- De twee vragen over het totale aantal tekstberichten zijn verwijderd.
+- De volgorde blijft per reset willekeurig.
