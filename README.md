@@ -6,7 +6,7 @@ Nieuwe versie zonder bingo. Dit spel bestaat uit:
 - Wie zei deze quote?
 - Waar of leugen?
 - Foxwild-feitjes
-- 40 seconden per ronde
+- 30 seconden per ronde
 - Geen motivatie of extra tekst
 - Inzetknoppen: 1, 3 of 5 punten
 - Live scorebord via Firebase
@@ -77,3 +77,10 @@ Open het optionele spelscherm en klik één keer op **Reset spel** voordat julli
 - Vragen/antwoorden waarin zij voorkwamen zijn verwijderd.
 - De twee vragen over het totale aantal tekstberichten zijn verwijderd.
 - De volgorde blijft per reset willekeurig.
+
+
+## v8 wijzigingen
+- De vragen over meest/minst berichten zijn terug als personenvragen.
+- De totalen-vragen over hoeveel berichten er precies in totaal zijn gestuurd blijven eruit.
+- Bij minst/meest wordt gekeken naar de vakantiegangers die meedoen.
+- Nieuw toegevoegd: minste berichten in de lustrumgroep en minste berichten in de QUOTES!!!-groep.

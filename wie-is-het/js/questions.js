@@ -68,12 +68,24 @@ window.WIE_IS_HET_QUESTIONS = [
     "type": "person",
     "prompt": "Wie stuurde de meeste berichten in de lustrumgroep?",
     "answer": "Chandler",
-    "explain": "Chandler staat bovenaan met 1.327 tekstberichten.",
+    "explain": "Chandler staat bovenaan met 1.327 berichten.",
     "options": [
       "Chandler",
       "Hugo",
       "Jasper",
       "Roos"
+    ]
+  },
+  {
+    "type": "person",
+    "prompt": "Wie stuurde van de vakantiegangers de minste berichten in de lustrumgroep?",
+    "answer": "Jacob",
+    "explain": "Als de niet-meespelende mensen niet meetellen, staat Jacob onderaan met 21 berichten.",
+    "options": [
+      "Jacob",
+      "Toon",
+      "Klaas",
+      "Kyo"
     ]
   },
   {
@@ -85,7 +97,7 @@ window.WIE_IS_HET_QUESTIONS = [
     "type": "person",
     "prompt": "Wie staat na Chandler op plek 2 qua meeste berichten in de lustrumgroep?",
     "answer": "Hugo",
-    "explain": "Hugo staat tweede met 605 tekstberichten.",
+    "explain": "Hugo staat tweede met 605 berichten.",
     "options": [
       "Hugo",
       "Jasper",
@@ -107,12 +119,24 @@ window.WIE_IS_HET_QUESTIONS = [
     "type": "person",
     "prompt": "Wie stuurde de meeste berichten in de QUOTES!!!-groep?",
     "answer": "Roos",
-    "explain": "Roos staat bovenaan in de quotegroep met 110 tekstberichten.",
+    "explain": "Roos staat bovenaan in de quotegroep met 110 berichten.",
     "options": [
       "Roos",
       "Anna",
       "Kyo",
       "Floris"
+    ]
+  },
+  {
+    "type": "person",
+    "prompt": "Wie stuurde van de vakantiegangers de minste berichten in de QUOTES!!!-groep?",
+    "answer": "Toon",
+    "explain": "Als de niet-meespelende mensen niet meetellen, staat Toon onderaan met 2 berichten.",
+    "options": [
+      "Toon",
+      "Jacob",
+      "Pim",
+      "Jasper"
     ]
   },
   {
