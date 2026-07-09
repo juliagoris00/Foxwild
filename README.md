@@ -84,3 +84,11 @@ Open het optionele spelscherm en klik één keer op **Reset spel** voordat julli
 - De totalen-vragen over hoeveel berichten er precies in totaal zijn gestuurd blijven eruit.
 - Bij minst/meest wordt gekeken naar de vakantiegangers die meedoen.
 - Nieuw toegevoegd: minste berichten in de lustrumgroep en minste berichten in de QUOTES!!!-groep.
+
+
+## v10 wijzigingen
+- Elke reset maakt een nieuwe willekeurige vragenvolgorde.
+- Tijdens één spel ziet iedereen wel dezelfde vraag in dezelfde ronde.
+- Op de gewone spelpagina zit nu een verborgen hostfunctie achter de hostcode.
+- Als alle auto's hebben geantwoord, kan de host de timer overslaan en direct onthullen.
+- De hostknop is lokaal: alleen zichtbaar op het toestel waarop de hostcode is ingevoerd.
