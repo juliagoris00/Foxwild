@@ -27,7 +27,11 @@
   let hostUnlocked = localStorage.getItem('wieIsHetHostUnlocked') === '1';
 
   const esc = (s) => String(s || '').replace(/[&<>'"]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[m]));
-  const norm = (s) => String(s || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  const norm = (s) => {
+    const cleaned = String(s || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    if (['wouter', 'chandler', 'wouter chandler', 'chandler wouter'].includes(cleaned)) return 'wouter chandler';
+    return cleaned;
+  };
   const hash = (s) => { let h = 0; for (const ch of String(s)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; };
 
   function makeOrder() {
@@ -76,9 +80,14 @@
   }
   function getRound(roundNo = state.round) { return rounds[String(roundNo)] || rounds[roundNo] || {}; }
   function answersObj() { return (getRound().answers) || {}; }
-  function timeLeft() { if (state.status !== 'active' || !state.startedAt) return null; const end = Number(state.startedAt) + Number(state.duration || ROUND_SECONDS) * 1000; return Math.max(0, Math.ceil((end - Date.now()) / 1000)); }
+  function timeLeft() {
+    if (state.status === 'paused') return Number(state.pausedRemaining || state.duration || ROUND_SECONDS);
+    if (state.status !== 'active' || !state.startedAt) return null;
+    const end = Number(state.startedAt) + Number(state.duration || ROUND_SECONDS) * 1000;
+    return Math.max(0, Math.ceil((end - Date.now()) / 1000));
+  }
   function format(sec) { if (sec === null) return '--:--'; const m = Math.floor(sec / 60), s = String(sec % 60).padStart(2, '0'); return `${m}:${s}`; }
-  function currentStatus() { if (state.status === 'active') return timeLeft() === 0 ? 'Tijd voorbij' : 'Open'; if (state.status === 'revealed') return 'Onthuld'; return 'Wachten'; }
+  function currentStatus() { if (state.status === 'active') return timeLeft() === 0 ? 'Tijd voorbij' : 'Open'; if (state.status === 'paused') return 'Gepauzeerd'; if (state.status === 'stopped') return 'Gestopt'; if (state.status === 'revealed') return 'Onthuld'; return 'Wachten'; }
 
   function optionsFor(q) {
     if (q.options) return q.options;
@@ -124,7 +133,7 @@
   function showGame(name) { $('setup').classList.add('hidden'); $('game').classList.remove('hidden'); $('teamTitle').textContent = name; renderHostControls(); }
 
   function renderRound() {
-    const active = state.status === 'active', revealed = state.status === 'revealed', waiting = !active && !revealed;
+    const active = state.status === 'active', paused = state.status === 'paused', stopped = state.status === 'stopped', revealed = state.status === 'revealed', waiting = !active && !paused && !stopped && !revealed;
     const q = state.round >= 0 ? qFor(state.round, state, getRound()) : { type: 'most', prompt: 'Wacht tot iemand de eerste ronde start...' };
     $('roundLabel').textContent = state.round >= 0 ? 'Ronde ' + (state.round + 1) : 'Nog niet gestart';
     $('categoryBadge').textContent = state.round >= 0 ? typeLabel(q) : 'Wachten';
@@ -132,9 +141,9 @@
     $('questionText').textContent = q.prompt;
     $('roundHelp').textContent = state.round >= 0 ? helpFor(q) : 'Iedere auto kan de eerste ronde starten.';
     $('statusText').textContent = currentStatus();
-    $('startRoundBtn').classList.toggle('hidden', active);
+    $('startRoundBtn').classList.toggle('hidden', active || paused || stopped);
     $('startRoundBtn').textContent = state.round < 0 ? `Start eerste ronde · ${ROUND_SECONDS} sec` : `Start volgende ronde · ${ROUND_SECONDS} sec`;
-    $('answerCard').classList.toggle('hidden', waiting || revealed);
+    $('answerCard').classList.toggle('hidden', waiting || stopped || revealed);
     $('answerCard').classList.toggle('disabled', !active || timeLeft() === 0);
     $('submitBtn').disabled = !active || timeLeft() === 0;
     $('answerLabel').textContent = q.type === 'most' ? 'Wie is het meest likely?' : 'Kies jullie antwoord';
@@ -188,6 +197,7 @@
     const unlockBtn = $('hostUnlockBtn');
     const panel = $('hostMini');
     const actionBtn = $('hostActionBtn');
+    const pauseBtn = $('hostPauseBtn');
     const help = $('hostMiniHelp');
     if (!unlockBtn || !panel || !actionBtn || !help) return;
     unlockBtn.classList.toggle('hidden', hostUnlocked);
@@ -195,9 +205,19 @@
     if (!hostUnlocked) return;
     const total = Object.keys(teams || {}).length;
     const answered = Object.keys(answersObj() || {}).length;
+    if (pauseBtn) {
+      pauseBtn.classList.remove('hidden');
+      pauseBtn.textContent = (state.status === 'paused' || state.status === 'stopped') ? '▶ Verdergaan' : '⏸ Stop/pauzeer';
+    }
     if (state.status === 'active') {
       actionBtn.textContent = `⏭ Onthul nu (${answered}/${total})`;
       help.textContent = total > 0 && answered >= total ? 'Iedereen heeft geantwoord. Je kunt de timer overslaan en meteen onthullen.' : 'Gebruik dit alleen als je ziet dat alle auto’s klaar zijn, of als je de ronde sneller wilt afsluiten.';
+    } else if (state.status === 'paused') {
+      actionBtn.textContent = `⏭ Onthul nu (${answered}/${total})`;
+      help.textContent = 'Het spel is gepauzeerd. Je kunt verdergaan of deze ronde meteen onthullen.';
+    } else if (state.status === 'stopped') {
+      actionBtn.textContent = '▶ Verdergaan';
+      help.textContent = 'Het spel staat stil. Druk op verdergaan om later door te spelen.';
     } else if (state.status === 'revealed') {
       actionBtn.textContent = '▶ Start volgende ronde';
       help.textContent = 'De uitslag is zichtbaar. Start de volgende ronde wanneer jullie door willen.';
@@ -213,7 +233,7 @@
     const ref = base.child('state');
     ref.transaction(s => {
       s = s || { round: -1, status: 'waiting' };
-      if (s.status === 'active') return;
+      if (s.status === 'active' || s.status === 'paused' || s.status === 'stopped') return;
       const order = validOrder(s.order) ? normalizeOrder(s.order) : freshOrder;
       const next = (typeof s.round === 'number' && s.round >= 0 && s.status !== 'waiting') ? s.round + 1 : 0;
       return { ...s, order, round: next, status: 'active', startedAt: Date.now(), duration: ROUND_SECONDS };
@@ -288,6 +308,44 @@
     await base.update(updates);
   }
 
+
+  async function togglePause() {
+    if (!firebaseReady) return alert('Firebase is nog niet gekoppeld.');
+    if (state.status === 'active') {
+      const remaining = timeLeft();
+      await base.child('state').update({ status: 'paused', pausedRemaining: remaining === null ? ROUND_SECONDS : remaining, stoppedFrom: 'active', pausedAt: Date.now() });
+    } else if (state.status === 'paused') {
+      const remaining = Number(state.pausedRemaining || state.duration || ROUND_SECONDS);
+      await base.child('state').update({ status: 'active', startedAt: Date.now(), duration: remaining, pausedRemaining: null, stoppedFrom: null, resumedAt: Date.now() });
+    } else if (state.status === 'revealed' || state.status === 'waiting') {
+      await base.child('state').update({ status: 'stopped', stoppedFrom: state.status, stoppedAt: Date.now() });
+    } else if (state.status === 'stopped') {
+      const from = state.stoppedFrom || 'revealed';
+      await base.child('state').update({ status: from, stoppedFrom: null, resumedAt: Date.now() });
+    }
+  }
+
+  async function resetGame() {
+    if (!firebaseReady) return alert('Firebase is nog niet gekoppeld.');
+    if (confirm('Hele spel resetten? Teams, scores en antwoorden verdwijnen. De vragen krijgen meteen een nieuwe willekeurige volgorde.')) {
+      await base.set({ state: { round: -1, status: 'waiting', startedAt: null, duration: ROUND_SECONDS, order: makeOrder(), resetAt: Date.now() } });
+    }
+  }
+
+  async function saveTeamNameFromFields(nameInputId, playersInputId) {
+    const name = $(nameInputId).value.trim();
+    if (!name) return alert('Vul een teamnaam in.');
+    const playersText = $(playersInputId).value.trim();
+    if (firebaseReady) {
+      const existing = teams[teamId] || {};
+      await base.child('teams/' + teamId).update({ name, players: playersText, score: existing.score || 0, updatedAt: firebase.database.ServerValue.TIMESTAMP, joinedAt: existing.joinedAt || firebase.database.ServerValue.TIMESTAMP });
+    }
+    localStorage.setItem('wieIsHetTeamName', name);
+    localStorage.setItem('wieIsHetPlayers', playersText);
+    $('teamTitle').textContent = name;
+    showGame(name);
+  }
+
   document.querySelectorAll('.bet').forEach(btn => btn.addEventListener('click', () => {
     document.querySelectorAll('.bet').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -295,13 +353,7 @@
   }));
 
   $('joinBtn').addEventListener('click', async () => {
-    const name = $('teamName').value.trim();
-    if (!name) return alert('Vul een teamnaam in.');
-    const playersText = $('carPlayers').value.trim();
-    if (firebaseReady) await base.child('teams/' + teamId).update({ name, players: playersText, score: 0, joinedAt: firebase.database.ServerValue.TIMESTAMP });
-    localStorage.setItem('wieIsHetTeamName', name);
-    localStorage.setItem('wieIsHetPlayers', playersText);
-    showGame(name);
+    await saveTeamNameFromFields('teamName', 'carPlayers');
   });
 
   $('submitBtn').addEventListener('click', async () => {
@@ -320,6 +372,9 @@
   $('closeScore').onclick = () => $('leaderboardPanel').classList.add('hidden');
   $('helpBtn').onclick = () => $('helpPanel').classList.remove('hidden');
   $('closeHelp').onclick = () => $('helpPanel').classList.add('hidden');
+  if ($('changeNameBtn')) $('changeNameBtn').onclick = () => { $('editTeamName').value = localStorage.getItem('wieIsHetTeamName') || (teams[teamId]?.name || ''); $('editCarPlayers').value = localStorage.getItem('wieIsHetPlayers') || (teams[teamId]?.players || ''); $('namePanel').classList.remove('hidden'); };
+  if ($('closeName')) $('closeName').onclick = () => $('namePanel').classList.add('hidden');
+  if ($('saveNameBtn')) $('saveNameBtn').onclick = async () => { await saveTeamNameFromFields('editTeamName', 'editCarPlayers'); $('namePanel').classList.add('hidden'); };
 
   if ($('hostUnlockBtn')) $('hostUnlockBtn').onclick = () => $('hostCodePanel').classList.remove('hidden');
   if ($('closeHostCode')) $('closeHostCode').onclick = () => $('hostCodePanel').classList.add('hidden');
@@ -335,8 +390,11 @@
     localStorage.removeItem('wieIsHetHostUnlocked');
     renderHostControls();
   };
+  if ($('hostPauseBtn')) $('hostPauseBtn').onclick = togglePause;
+  if ($('hostResetBtn')) $('hostResetBtn').onclick = resetGame;
   if ($('hostActionBtn')) $('hostActionBtn').onclick = async () => {
-    if (state.status === 'active') await finalizeRound(state.round);
+    if (state.status === 'active' || state.status === 'paused') await finalizeRound(state.round);
+    else if (state.status === 'stopped') await togglePause();
     else await startNextRound();
   };
 

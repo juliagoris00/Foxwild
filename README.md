@@ -6,7 +6,7 @@ Nieuwe versie zonder bingo. Dit spel bestaat uit:
 - Wie zei deze quote?
 - Waar of leugen?
 - Foxwild-feitjes
-- 30 seconden per ronde
+- 60 seconden per ronde
 - Geen motivatie of extra tekst
 - Inzetknoppen: 1, 3 of 5 punten
 - Live scorebord via Firebase
@@ -92,3 +92,18 @@ Open het optionele spelscherm en klik één keer op **Reset spel** voordat julli
 - Op de gewone spelpagina zit nu een verborgen hostfunctie achter de hostcode.
 - Als alle auto's hebben geantwoord, kan de host de timer overslaan en direct onthullen.
 - De hostknop is lokaal: alleen zichtbaar op het toestel waarop de hostcode is ingevoerd.
+
+
+## v13 wijzigingen
+
+- Tijd per ronde staat op 60 seconden.
+- Host kan de timer pauzeren en hervatten.
+- Wouter en Chandler zijn samengevoegd tot één speler: Wouter / Chandler.
+
+
+## Nieuw in v13
+
+- Op de spelpagina staat nu altijd een knop **Naam** om je team/auto naam tussendoor te wijzigen. Handig als een telefoon het startscherm overslaat.
+- In de lokale hostknop zit nu ook **Reset spel**.
+- De host kan het spel **stoppen/pauzeren** en later weer verder laten gaan.
+- De losse adminpagina blijft beschikbaar op `/wie-is-het/admin.html`.

@@ -11,4 +11,4 @@ window.firebaseConfig = {
 
 window.WIE_IS_HET_GAME_ID = "wie-is-het-2026";
 window.WIE_IS_HET_ADMIN_CODE = "LILLE2026";
-window.WIE_IS_HET_ROUND_SECONDS = 30;
+window.WIE_IS_HET_ROUND_SECONDS = 60;

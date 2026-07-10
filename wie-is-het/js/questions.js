@@ -11,8 +11,7 @@ window.WIE_IS_HET_PLAYERS = [
   "Julia",
   "Kyo",
   "Klaas",
-  "Wouter",
-  "Chandler",
+  "Wouter / Chandler",
   "Jacob",
   "Toon"
 ];
@@ -67,10 +66,10 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "person",
     "prompt": "Wie stuurde de meeste berichten in de lustrumgroep?",
-    "answer": "Chandler",
-    "explain": "Chandler staat bovenaan met 1.327 berichten.",
+    "answer": "Wouter / Chandler",
+    "explain": "Wouter/Chandler staat bovenaan met 1.327 berichten.",
     "options": [
-      "Chandler",
+      "Wouter / Chandler",
       "Hugo",
       "Jasper",
       "Roos"
@@ -95,7 +94,7 @@ window.WIE_IS_HET_QUESTIONS = [
   },
   {
     "type": "person",
-    "prompt": "Wie staat na Chandler op plek 2 qua meeste berichten in de lustrumgroep?",
+    "prompt": "Wie staat na Wouter/Chandler op plek 2 qua meeste berichten in de lustrumgroep?",
     "answer": "Hugo",
     "explain": "Hugo staat tweede met 605 berichten.",
     "options": [
@@ -331,7 +330,7 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik chill altijd als ik slaap.",
-    "answer": "Wouter"
+    "answer": "Wouter / Chandler"
   },
   {
     "type": "truth",
@@ -489,7 +488,7 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik ben wel blij dat mijn vingers een beetje koud zijn nu, voor mijn hoofd.",
-    "answer": "Wouter"
+    "answer": "Wouter / Chandler"
   },
   {
     "type": "truth",
@@ -556,7 +555,7 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wacht, maar hoe verplaatsen auto’s zich?",
-    "answer": "Wouter"
+    "answer": "Wouter / Chandler"
   },
   {
     "type": "most",

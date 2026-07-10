@@ -15,7 +15,11 @@
   let revealBusy = false;
 
   const esc = (s) => String(s || '').replace(/[&<>'"]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[m]));
-  const norm = (s) => String(s || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  const norm = (s) => {
+    const cleaned = String(s || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+    if (['wouter', 'chandler', 'wouter chandler', 'chandler wouter'].includes(cleaned)) return 'wouter chandler';
+    return cleaned;
+  };
   const format = (sec) => { if (sec === null) return '--:--'; const m = Math.floor(sec / 60), s = String(sec % 60).padStart(2, '0'); return `${m}:${s}`; };
 
   function makeOrder() {
@@ -45,8 +49,13 @@
   function qFor(roundNo, st = state, roundData = null) { return questions[qIndexFor(roundNo, st, roundData)] || questions[0] || { type: 'most', prompt: 'Vraag' }; }
   function typeLabel(q) { return q.type === 'quote' ? 'Wie zei deze quote?' : q.type === 'truth' ? 'Waar of leugen?' : q.type === 'person' ? 'Foxwild-feit' : 'Most likely'; }
   function typeClass(q) { return q.type === 'quote' ? 'quote' : q.type === 'truth' ? 'truth' : q.type === 'person' ? 'person' : 'most'; }
-  function timeLeft() { if (state.status !== 'active' || !state.startedAt) return null; const end = Number(state.startedAt) + Number(state.duration || ROUND_SECONDS) * 1000; return Math.max(0, Math.ceil((end - Date.now()) / 1000)); }
-  function currentStatus() { if (state.status === 'active') return timeLeft() === 0 ? 'Tijd voorbij' : 'Open'; if (state.status === 'revealed') return 'Onthuld'; return 'Wachten'; }
+  function timeLeft() {
+    if (state.status === 'paused') return Number(state.pausedRemaining || state.duration || ROUND_SECONDS);
+    if (state.status !== 'active' || !state.startedAt) return null;
+    const end = Number(state.startedAt) + Number(state.duration || ROUND_SECONDS) * 1000;
+    return Math.max(0, Math.ceil((end - Date.now()) / 1000));
+  }
+  function currentStatus() { if (state.status === 'active') return timeLeft() === 0 ? 'Tijd voorbij' : 'Open'; if (state.status === 'paused') return 'Gepauzeerd'; if (state.status === 'stopped') return 'Gestopt'; if (state.status === 'revealed') return 'Onthuld'; return 'Wachten'; }
 
   function render() {
     const q = state.round >= 0 ? qFor(state.round, state, getRound()) : { type: 'most', prompt: 'Nog niet gestart.' };
@@ -62,6 +71,10 @@
     const arr = Object.values(answers);
     $('answerCount').textContent = arr.length;
     $('hostStatus').textContent = currentStatus();
+    if ($('pauseBtn')) {
+      $('pauseBtn').classList.remove('hidden');
+      $('pauseBtn').textContent = (state.status === 'paused' || state.status === 'stopped') ? '▶ Verdergaan' : '⏸ Stop/pauzeer';
+    }
     const round = getRound();
     if (round.summary) { $('hostSummary').classList.remove('hidden'); $('hostSummary').innerHTML = esc(round.summary); } else { $('hostSummary').classList.add('hidden'); }
     $('hostAnswers').innerHTML = arr.length ? arr.sort((a, b) => (a.at || 0) - (b.at || 0)).map(a => {
@@ -83,7 +96,7 @@
     const ref = base.child('state');
     ref.transaction(s => {
       s = s || { round: -1, status: 'waiting' };
-      if (s.status === 'active') return;
+      if (s.status === 'active' || s.status === 'paused' || s.status === 'stopped') return;
       const order = validOrder(s.order) ? normalizeOrder(s.order) : freshOrder;
       const next = (typeof s.round === 'number' && s.round >= 0 && s.status !== 'waiting') ? s.round + 1 : 0;
       return { ...s, order, round: next, status: 'active', startedAt: Date.now(), duration: ROUND_SECONDS };
@@ -158,6 +171,22 @@
     await base.update(updates);
   }
 
+
+  async function togglePause() {
+    if (state.status === 'active') {
+      const remaining = timeLeft();
+      await base.child('state').update({ status: 'paused', pausedRemaining: remaining === null ? ROUND_SECONDS : remaining, stoppedFrom: 'active', pausedAt: Date.now() });
+    } else if (state.status === 'paused') {
+      const remaining = Number(state.pausedRemaining || state.duration || ROUND_SECONDS);
+      await base.child('state').update({ status: 'active', startedAt: Date.now(), duration: remaining, pausedRemaining: null, stoppedFrom: null, resumedAt: Date.now() });
+    } else if (state.status === 'revealed' || state.status === 'waiting') {
+      await base.child('state').update({ status: 'stopped', stoppedFrom: state.status, stoppedAt: Date.now() });
+    } else if (state.status === 'stopped') {
+      const from = state.stoppedFrom || 'revealed';
+      await base.child('state').update({ status: from, stoppedFrom: null, resumedAt: Date.now() });
+    }
+  }
+
   $('loginBtn').onclick = () => {
     if ($('code').value.trim() !== (window.WIE_IS_HET_ADMIN_CODE || 'LILLE2026')) return alert('Verkeerde code');
     $('login').classList.add('hidden');
@@ -165,6 +194,7 @@
   };
   $('nextBtn').onclick = startNextRound;
   $('revealBtn').onclick = revealAndScore;
+  if ($('pauseBtn')) $('pauseBtn').onclick = togglePause;
   $('resetBtn').onclick = async () => {
     if (confirm('Hele spel resetten? Teams, scores en antwoorden verdwijnen. De vragen krijgen meteen een nieuwe willekeurige volgorde.')) {
       await base.set({ state: { round: -1, status: 'waiting', startedAt: null, duration: ROUND_SECONDS, order: makeOrder(), resetAt: Date.now() } });
