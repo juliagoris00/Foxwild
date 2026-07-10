@@ -44,3 +44,8 @@ Upload de inhoud van deze map naar je GitHub repository `Foxwild` en laat oude b
 
 De hostcode staat in `wie-is-het/js/firebase-config.js`.
 
+
+
+## v15 fix
+
+Deze versie fixt een probleem waarbij de ronde soms bleef hangen na “Onthul nu”.

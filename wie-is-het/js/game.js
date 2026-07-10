@@ -298,11 +298,29 @@
 
   async function finalizeRound(roundNo) {
     if (!firebaseReady || roundNo < 0) return;
+    if (finalizeBusy) return;
     finalizeBusy = true;
+
+    // In oudere versies kon een scoreLock blijven hangen. Dan leek de knop
+    // "Onthul nu" niets meer te doen. Deze lock verloopt automatisch.
     const lockRef = base.child('rounds/' + roundNo + '/scoreLock');
-    lockRef.transaction(v => v ? undefined : teamId, async (err, committed) => {
-      if (err || !committed) { finalizeBusy = false; return; }
-      try { await calculateAndReveal(roundNo); } finally { finalizeBusy = false; }
+    const now = Date.now();
+    lockRef.transaction(v => {
+      if (!v) return { by: teamId, at: now };
+      if (typeof v === 'string') return { by: teamId, at: now }; // oude/stale lock opruimen
+      if (v && v.at && now - Number(v.at) > 10000) return { by: teamId, at: now };
+      return;
+    }, async (err, committed) => {
+      if (err) { finalizeBusy = false; alert('Onthullen lukte niet: ' + err.message); return; }
+      if (!committed) { finalizeBusy = false; return; }
+      try {
+        await calculateAndReveal(roundNo);
+      } catch (e) {
+        console.error(e);
+        alert('Onthullen lukte niet. Probeer het nog een keer.');
+      } finally {
+        finalizeBusy = false;
+      }
     });
   }
 
