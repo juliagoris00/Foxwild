@@ -16,14 +16,14 @@
     <section id="setup" class="card hero">
       <div class="pill">🚗 Foxwild roadtrip game</div>
       <h1>Wie is het?</h1>
-      <p class="sub"><b>Een snel, competitief spel voor de auto’s richting Lille.</b><br>Elke auto speelt als team. Jullie krijgen 60 seconden per ronde om te overleggen, één antwoord te kiezen en 1, 3 of 5 punten in te zetten. Daarna wordt automatisch onthuld. Als iedereen eerder klaar is, kan de host de timer overslaan.</p>
+      <p class="sub"><b>Een snel, competitief spel voor de auto’s richting Lille.</b><br>Elke auto speelt als team. Vul jullie teamnaam in, klik op de vos en wacht tot de host ziet dat alle auto’s erin zitten. Daarna krijgen jullie 60 seconden per ronde om te overleggen, één antwoord te kiezen en 1, 3 of 5 punten in te zetten. Daarna wordt automatisch onthuld. Als iedereen eerder klaar is, kan de host de ronde overslaan.</p>
       <div class="rules">
         <div class="rule"><b>Most likely</b><div class="meta">Kies wie volgens jullie de meeste stemmen krijgt. De meerderheid levert punten op.</div></div>
         <div class="rule"><b>Wie zei deze quote?</b><div class="meta">Raad van wie een echte Foxwild-quote kwam. Goed = punten erbij, fout = punten eraf.</div></div>
         <div class="rule"><b>Waar of leugen?</b><div class="meta">Sommige dingen zijn echt gezegd. Andere klinken alleen alsof dat zo is.</div></div>
         <div class="rule"><b>Foxwild-feit</b><div class="meta">Korte vragen over dingen uit de groep, zonder gedoe of lange motivatie.</div></div>
       </div>
-      <p class="help"><b>Geen vaste host nodig.</b> Iedereen kan na de onthulling de volgende ronde starten. Jij kunt met de hostcode op je eigen telefoon een kleine skipknop ontgrendelen als alle auto’s al klaar zijn.</p>
+      <p class="help"><b>Start pas als iedereen erin zit.</b> Na het invullen kom je in de wachtruimte. Klik daar op de grote vos. De host start het spel zodra alle auto’s klaarstaan.</p>
       <label>Team / auto naam</label>
       <input id="teamName" maxlength="24" placeholder="Bijv. Auto Julia" />
       <label>Wie zitten er in jullie auto? <span class="meta">optioneel</span></label>
@@ -45,8 +45,15 @@
           <button id="hostUnlockBtn" class="ghost tiny-host">Host</button>
         </div>
       </header>
+      <section id="lobbyCard" class="card lobby-card hidden">
+        <div class="round-meta"><span>Wachtruimte</span><span id="readyCount" class="timer">0/0</span></div>
+        <h3>Welkom in Wie is het?</h3>
+        <p class="help">Klik op de vos als jullie auto klaarzit. De host ziet hoeveel auto’s klaar zijn en start daarna de eerste ronde. Tot die tijd kunnen jullie alvast teamnaam of inzittenden aanpassen.</p>
+        <button id="readyFoxBtn" class="fox-button" type="button"><span class="fox">🦊</span><span>Wij zijn klaar</span></button>
+        <p id="readyText" class="success hidden">Jullie staan erin. Wacht tot de host het spel start.</p>
+      </section>
 
-      <section class="card round-card">
+      <section id="roundCard" class="card round-card">
         <div class="round-meta"><span id="roundLabel">Ronde</span><span id="timer" class="timer">--:--</span></div>
         <div id="categoryBadge" class="category most">Wachten</div>
         <h3 id="questionText" class="question">Wacht tot iemand de eerste ronde start...</h3>
@@ -59,24 +66,11 @@
         <button id="startRoundBtn" class="primary alt">Start eerste ronde · 60 sec</button>
       </section>
 
-      <section id="hostMini" class="card host-mini hidden">
-        <div class="round-meta"><span>Hostknop</span><span class="timer">alleen lokaal</span></div>
-        <p id="hostMiniHelp" class="help">Gebruik dit alleen als alle auto’s klaar zijn.</p>
-        <div class="row3">
-          <button id="hostActionBtn" class="green">⏭ Onthul nu</button>
-          <button id="hostPauseBtn" class="ghost">⏸ Stop/pauzeer</button>
-          <button id="hostResetBtn" class="danger">Reset spel</button>
-          <button id="lockHostBtn" class="ghost">Verberg hostknop</button>
-        </div>
-      </section>
+
 
       <section id="answerCard" class="card hidden">
         <label id="answerLabel">Kies jullie antwoord</label>
         <div id="options" class="option-grid"></div>
-        <div id="customWrap" class="hidden">
-          <label>Andere naam</label>
-          <input id="customAnswer" maxlength="30" placeholder="Typ naam" />
-        </div>
         <label>Inzet</label>
         <div class="bets">
           <button class="bet active" data-bet="1">1</button>
@@ -93,9 +87,22 @@
         <div id="resultSummary" class="notice hidden"></div>
         <div id="answersList" class="answers"></div>
       </section>
+
+      <section id="hostMini" class="card host-mini hidden">
+        <div class="round-meta"><span>Hostknop</span><span class="timer">alleen lokaal</span></div>
+        <p id="hostMiniHelp" class="help">Gebruik dit alleen als alle auto’s klaar zijn.</p>
+        <div class="row3">
+          <button id="hostActionBtn" class="green">⏭ Onthul nu</button>
+          <button id="hostPauseBtn" class="ghost">⏸ Stop/pauzeer</button>
+          <button id="hostResetBtn" class="danger">Reset spel</button>
+          <button id="lockHostBtn" class="ghost">Verberg hostknop</button>
+        </div>
+      </section>
     </section>
 
     <section id="leaderboardPanel" class="drawer hidden"><div class="drawer-inner"><button id="closeScore" class="ghost close">Sluiten</button><h2>🏆 Live scorebord</h2><div id="leaderboard"></div></div></section>
+
+    <section id="resultPopup" class="drawer hidden"><div class="drawer-inner result-pop"><button id="closeResultPopup" class="ghost close">Sluiten</button><div class="pill">🎉 Uitslag</div><h2 id="popupTitle">Antwoord</h2><p id="popupAnswer" class="popup-answer"></p><p id="popupDetails" class="help"></p><button id="popupNextBtn" class="primary">Door</button></div></section>
     <section id="hostCodePanel" class="drawer hidden"><div class="drawer-inner"><button id="closeHostCode" class="ghost close">Sluiten</button><h2>Hostknop ontgrendelen</h2><p class="help">Deze knop is alleen op dit toestel zichtbaar na het invoeren van de hostcode. Hiermee kun je de timer overslaan, pauzeren/stoppen of resetten.</p><label>Hostcode</label><input id="hostCodeInput" placeholder="Hostcode" /><button id="hostCodeBtn" class="primary">Ontgrendel hostknop</button></div></section>
 
     <section id="namePanel" class="drawer hidden"><div class="drawer-inner"><button id="closeName" class="ghost close">Sluiten</button><h2>Teamnaam wijzigen</h2><p class="help">Gebruik dit als je telefoon het startscherm overslaat of als jullie auto/teamnaam niet klopt. Dit past alleen jullie eigen team aan.</p><label>Team / auto naam</label><input id="editTeamName" maxlength="24" placeholder="Bijv. Auto Julia" /><label>Wie zitten er in jullie auto? <span class="meta">optioneel</span></label><textarea id="editCarPlayers" placeholder="Bijv. Julia, Bram, Sophie, Tim"></textarea><button id="saveNameBtn" class="primary">Naam opslaan</button></div></section>

@@ -24,7 +24,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wat voel ik nou bewegen in mijn tas, ohhhh dat is de Coolbest.",
-    "answer": "Julia"
+    "answer": "Julia",
+    "explain": "Gezegd door Julia. Gedeeld in de QUOTES!!! door Tessa op 17-10-2021. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -39,7 +40,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Een auto is eigenlijk gewoon een hele dure box.",
-    "answer": "Klaas"
+    "answer": "Klaas",
+    "explain": "Gezegd door Klaas. Gedeeld in de QUOTES!!! door Kyo op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -163,7 +165,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Iets anders dan een quote in de quote groep sturen is een bak.",
-    "answer": "Roos"
+    "answer": "Roos",
+    "explain": "Gezegd door Roos. Gedeeld in de QUOTES!!! door Pim op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -187,7 +190,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik ben erachter gekomen dat als ik laag zing ik best mooi kan zingen.",
-    "answer": "Jacob"
+    "answer": "Jacob",
+    "explain": "Gezegd door Jacob. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -196,7 +200,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik ben nog lang niet moe, ik ben de Bieber van de kroeg.",
-    "answer": "Thomas"
+    "answer": "Thomas",
+    "explain": "Gezegd door Thomas. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -221,7 +226,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "He, maar vandaag gaan we rustig aan doen hè?",
-    "answer": "Floris"
+    "answer": "Floris",
+    "explain": "Gezegd door Floris. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -230,7 +236,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "De enige quote die ik ken is de Quote 500.",
-    "answer": "Klaas"
+    "answer": "Klaas",
+    "explain": "Gezegd door Klaas. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -254,7 +261,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wat heb je aan succes als je niks kan delen.",
-    "answer": "Klaas"
+    "answer": "Klaas",
+    "explain": "Gezegd door Klaas. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -263,7 +271,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wat is pizza in het Frans?",
-    "answer": "Anne"
+    "answer": "Anne",
+    "explain": "Gezegd door Anne. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -288,7 +297,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wat is het centrum van Spa toch bruisend.",
-    "answer": "Roos"
+    "answer": "Roos",
+    "explain": "Gezegd door Roos. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -297,7 +307,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik dacht eigenlijk dus dat paella altijd een broodje was.",
-    "answer": "Pim"
+    "answer": "Pim",
+    "explain": "Gezegd door Pim. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -321,7 +332,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Huilen met de hoofdletter J.",
-    "answer": "Hugo"
+    "answer": "Hugo",
+    "explain": "Gezegd door Hugo. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -330,7 +342,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik chill altijd als ik slaap.",
-    "answer": "Wouter / Chandler"
+    "answer": "Wouter / Chandler",
+    "explain": "Gezegd door Wouter / Chandler. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -345,7 +358,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Het ruikt hier naar Groesbeek.",
-    "answer": "Thomas"
+    "answer": "Thomas",
+    "explain": "Gezegd door Thomas. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -364,7 +378,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Als je de ruimte hebt, moet je de ruimte gebruiken. Dit staat over 20 jaar in mijn boek.",
-    "answer": "Julia"
+    "answer": "Julia",
+    "explain": "Gezegd door Julia. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -388,7 +403,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Een winnaar heb je wanneer iemand wint.",
-    "answer": "Pim"
+    "answer": "Pim",
+    "explain": "Gezegd door Pim. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -397,7 +413,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik wil een staande ovatie geven, maar ik heb geen zin om op te staan.",
-    "answer": "Kyo"
+    "answer": "Kyo",
+    "explain": "Gezegd door Kyo. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -412,7 +429,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Is kreeft een sterrenbeeld?",
-    "answer": "Klaas"
+    "answer": "Klaas",
+    "explain": "Gezegd door Klaas. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -431,7 +449,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik heb een goeie woorden advies.",
-    "answer": "Anna"
+    "answer": "Anna",
+    "explain": "Gezegd door Anna. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -455,7 +474,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Banaan oppaffen.",
-    "answer": "Stefan"
+    "answer": "Stefan",
+    "explain": "Gezegd door Stefan. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -464,7 +484,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik heb een hoedenhoofd, geen brillenhoofd.",
-    "answer": "Julia"
+    "answer": "Julia",
+    "explain": "Gezegd door Julia. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -479,7 +500,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ja Brabant is geen provincie maar een geloof.",
-    "answer": "Jasper"
+    "answer": "Jasper",
+    "explain": "Gezegd door Jasper. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -488,7 +510,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik ben wel blij dat mijn vingers een beetje koud zijn nu, voor mijn hoofd.",
-    "answer": "Wouter / Chandler"
+    "answer": "Wouter / Chandler",
+    "explain": "Gezegd door Wouter / Chandler. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -522,7 +545,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik vind kippen die rennen één van de mooiste dingen die bestaan op de wereld.",
-    "answer": "Roos"
+    "answer": "Roos",
+    "explain": "Gezegd door Roos. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -531,7 +555,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik weet een grappig grapje, maar weet hem alleen in het Engels.",
-    "answer": "Anne"
+    "answer": "Anne",
+    "explain": "Gezegd door Anne. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -546,7 +571,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wij zouden een vriendengroep moeten starten met écht leuke mensen.",
-    "answer": "Julia"
+    "answer": "Julia",
+    "explain": "Gezegd door Julia. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -555,7 +581,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wacht, maar hoe verplaatsen auto’s zich?",
-    "answer": "Wouter / Chandler"
+    "answer": "Wouter / Chandler",
+    "explain": "Gezegd door Wouter / Chandler. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -579,7 +606,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik vind geserveerde donuts toch echt wel facking gaaf.",
-    "answer": "Hugo"
+    "answer": "Hugo",
+    "explain": "Gezegd door Hugo. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -588,7 +616,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik moet helemaal niks. Ik bepaal zelf wat ik doe. Ik ben een independent Klaas.",
-    "answer": "Klaas"
+    "answer": "Klaas",
+    "explain": "Gezegd door Klaas. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "truth",
@@ -603,7 +632,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Mijn leven is zo op orde, ik heb zelfs mijn breakdowns gepland.",
-    "answer": "Julia"
+    "answer": "Julia",
+    "explain": "Gezegd door Julia. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -612,7 +642,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik pak alleen menu omdat de milkshake dan goedkoper is.",
-    "answer": "Kyo"
+    "answer": "Kyo",
+    "explain": "Gezegd door Kyo. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -631,7 +662,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wat is eigenlijk de achternaam van jouw vader?",
-    "answer": "Julia"
+    "answer": "Julia",
+    "explain": "Gezegd door Julia. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -640,12 +672,14 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wejow, kei veel bakstenen.",
-    "answer": "Jasper"
+    "answer": "Jasper",
+    "explain": "Gezegd door Jasper. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "quote",
     "prompt": "Ik hoef geen accent, doe mij maar gewoon ANWB.",
-    "answer": "Anne"
+    "answer": "Anne",
+    "explain": "Gezegd door Anne. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -654,7 +688,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Weet je wat ik nou de echt grootste red flag vind: mensen zoals ik.",
-    "answer": "Julia"
+    "answer": "Julia",
+    "explain": "Gezegd door Julia. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -663,7 +698,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik hou van mansplainen, dan hoef ik zelf niet meer na te denken.",
-    "answer": "Julia"
+    "answer": "Julia",
+    "explain": "Gezegd door Julia. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -672,12 +708,14 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Ik vind Nijmegen niet per se mooi.",
-    "answer": "Kyo"
+    "answer": "Kyo",
+    "explain": "Gezegd door Kyo. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "quote",
     "prompt": "Het is een mental state of mind.",
-    "answer": "Julia"
+    "answer": "Julia",
+    "explain": "Gezegd door Julia. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -686,7 +724,8 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Wat is jullie mening over snorren?",
-    "answer": "Pim"
+    "answer": "Pim",
+    "explain": "Gezegd door Pim. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "most",
@@ -695,16 +734,19 @@ window.WIE_IS_HET_QUESTIONS = [
   {
     "type": "quote",
     "prompt": "Hoe spel je Arnhem?",
-    "answer": "Roos"
+    "answer": "Roos",
+    "explain": "Gezegd door Roos. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "quote",
     "prompt": "Als je moet schijten maar dan anders? Poepen, en dan vogel? Met de K? Kaketoe.",
-    "answer": "Kyo"
+    "answer": "Kyo",
+    "explain": "Gezegd door Kyo. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   },
   {
     "type": "quote",
     "prompt": "Voor iemand die zoveel denkt, zeg je behoorlijk weinig.",
-    "answer": "Hugo"
+    "answer": "Hugo",
+    "explain": "Gezegd door Hugo. Gedeeld in de QUOTES!!! door Roos op 08-08-2022. Tegen wie het precies was, staat niet altijd apart in de WhatsApp-export."
   }
 ];

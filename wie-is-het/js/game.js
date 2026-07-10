@@ -25,6 +25,7 @@
   let lastRound = null;
   let finalizeBusy = false;
   let hostUnlocked = localStorage.getItem('wieIsHetHostUnlocked') === '1';
+  let lastPopupRound = localStorage.getItem('wieIsHetLastPopupRound') || null;
 
   const esc = (s) => String(s || '').replace(/[&<>'"]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[m]));
   const norm = (s) => {
@@ -89,6 +90,56 @@
   function format(sec) { if (sec === null) return '--:--'; const m = Math.floor(sec / 60), s = String(sec % 60).padStart(2, '0'); return `${m}:${s}`; }
   function currentStatus() { if (state.status === 'active') return timeLeft() === 0 ? 'Tijd voorbij' : 'Open'; if (state.status === 'paused') return 'Gepauzeerd'; if (state.status === 'stopped') return 'Gestopt'; if (state.status === 'revealed') return 'Onthuld'; return 'Wachten'; }
 
+
+  function currentTeamReady() {
+    return !!(teams[teamId] && teams[teamId].ready);
+  }
+
+  function readyTeamsCount() {
+    return Object.values(teams || {}).filter(t => t && t.ready).length;
+  }
+
+  function resultTextFor(q, round = {}) {
+    if (!q) return { title: 'Uitslag', answer: '-', details: '' };
+    if (q.type === 'most') {
+      return { title: 'Uitslag', answer: round.summary || 'Geen uitslag', details: 'Bij Most likely draait het om de meerderheid van alle auto’s.' };
+    }
+    let answer = q.answer || '-';
+    let title = q.type === 'quote' ? 'Wie zei deze quote?' : q.type === 'truth' ? 'Waar of leugen?' : 'Goede antwoord';
+    let details = q.explain || '';
+    if (q.type === 'quote') {
+      if (answer === 'Dit is nooit gezegd') details = details || 'Deze quote klonk Foxwild-proof, maar stond niet in de quote-export.';
+      else details = details || 'Uit de quote-export. Niet bij elke quote staat letterlijk tegen wie het gezegd werd.';
+    }
+    return { title, answer, details };
+  }
+
+  function maybeShowResultPopup() {
+    if (state.status !== 'revealed' || state.round < 0) return;
+    const key = String(state.round) + ':' + String(getRound().scoredAt || '');
+    if (!getRound().scoredAt || lastPopupRound === key) return;
+    const q = qFor(state.round, state, getRound());
+    const info = resultTextFor(q, getRound());
+    $('popupTitle').textContent = info.title;
+    $('popupAnswer').textContent = info.answer;
+    $('popupDetails').textContent = info.details || (getRound().summary || '');
+    $('resultPopup').classList.remove('hidden');
+    lastPopupRound = key;
+    localStorage.setItem('wieIsHetLastPopupRound', key);
+  }
+
+  function renderLobby() {
+    if (!$('lobbyCard')) return;
+    const waiting = state.status === 'waiting' || state.round < 0;
+    $('lobbyCard').classList.toggle('hidden', !waiting);
+    if ($('roundCard')) $('roundCard').classList.toggle('hidden', waiting && !hostUnlocked);
+    const total = Object.keys(teams || {}).length;
+    const ready = readyTeamsCount();
+    $('readyCount').textContent = `${ready}/${total}`;
+    $('readyText').classList.toggle('hidden', !currentTeamReady());
+    $('readyFoxBtn').innerHTML = currentTeamReady() ? '<span class="fox">🦊</span><span>Klaar! Wacht op de host</span>' : '<span class="fox">🦊</span><span>Wij zijn klaar</span>';
+  }
+
   function optionsFor(q) {
     if (q.options) return q.options;
     if (q.type === 'truth') return ['Waar', 'Leugen'];
@@ -116,21 +167,16 @@
   function renderOptions() {
     const q = state.round >= 0 ? qFor(state.round, state, getRound()) : { type: 'most' };
     selectedAnswer = null;
-    $('customWrap').classList.add('hidden');
-    $('customAnswer').value = '';
     let opts = optionsFor(q);
-    if (q.type === 'most') opts = [...opts, 'Andere naam'];
     $('options').innerHTML = opts.map(o => `<button type="button" class="option" data-answer="${esc(o)}">${esc(o)}</button>`).join('');
     document.querySelectorAll('[data-answer]').forEach(btn => btn.onclick = () => {
       document.querySelectorAll('[data-answer]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       selectedAnswer = btn.dataset.answer;
-      $('customWrap').classList.toggle('hidden', selectedAnswer !== 'Andere naam');
-      if (selectedAnswer === 'Andere naam') $('customAnswer').focus();
     });
   }
 
-  function showGame(name) { $('setup').classList.add('hidden'); $('game').classList.remove('hidden'); $('teamTitle').textContent = name; renderHostControls(); }
+  function showGame(name) { $('setup').classList.add('hidden'); $('game').classList.remove('hidden'); $('teamTitle').textContent = name; renderLobby(); renderHostControls(); }
 
   function renderRound() {
     const active = state.status === 'active', paused = state.status === 'paused', stopped = state.status === 'stopped', revealed = state.status === 'revealed', waiting = !active && !paused && !stopped && !revealed;
@@ -139,9 +185,9 @@
     $('categoryBadge').textContent = state.round >= 0 ? typeLabel(q) : 'Wachten';
     $('categoryBadge').className = 'category ' + typeClass(q);
     $('questionText').textContent = q.prompt;
-    $('roundHelp').textContent = state.round >= 0 ? helpFor(q) : 'Iedere auto kan de eerste ronde starten.';
+    $('roundHelp').textContent = state.round >= 0 ? helpFor(q) : 'Wacht tot de host het spel start zodra alle auto’s klaarstaan.';
     $('statusText').textContent = currentStatus();
-    $('startRoundBtn').classList.toggle('hidden', active || paused || stopped);
+    $('startRoundBtn').classList.toggle('hidden', active || paused || stopped || !hostUnlocked);
     $('startRoundBtn').textContent = state.round < 0 ? `Start eerste ronde · ${ROUND_SECONDS} sec` : `Start volgende ronde · ${ROUND_SECONDS} sec`;
     $('answerCard').classList.toggle('hidden', waiting || stopped || revealed);
     $('answerCard').classList.toggle('disabled', !active || timeLeft() === 0);
@@ -159,7 +205,9 @@
     const mine = teams[teamId] || {};
     $('myScore').textContent = mine.score || 0;
     updateTimer();
+    renderLobby();
     renderHostControls();
+    maybeShowResultPopup();
   }
 
   function updateTimer() {
@@ -176,7 +224,7 @@
     if (!arr.length) { $('answersList').innerHTML = '<p class="help">Nog geen antwoorden.</p>'; $('resultSummary').classList.add('hidden'); return; }
     const revealed = state.status === 'revealed';
     const round = getRound();
-    if (revealed && round.summary) { $('resultSummary').classList.remove('hidden'); $('resultSummary').innerHTML = esc(round.summary); } else { $('resultSummary').classList.add('hidden'); }
+    if (revealed && round.summary) { $('resultSummary').classList.remove('hidden'); $('resultSummary').classList.add('result-summary-big'); $('resultSummary').innerHTML = esc(round.summary); } else { $('resultSummary').classList.add('hidden'); }
     $('answersList').innerHTML = arr.map(a => {
       const result = ((round.results || {})[a.teamId]) || null;
       const resultHtml = revealed && result ? `<div class="meta ${result.delta > 0 ? 'result-good' : result.delta < 0 ? 'result-bad' : 'result-neutral'}">${result.delta > 0 ? '+' : ''}${result.delta} punten · ${esc(result.label || '')}</div>` : '';
@@ -228,6 +276,7 @@
   }
 
   async function startNextRound() {
+    if (!hostUnlocked) return alert('Alleen de host kan het spel starten of doorgaan.');
     if (!firebaseReady) return alert('Firebase is nog niet gekoppeld.');
     const freshOrder = makeOrder();
     const ref = base.child('state');
@@ -282,6 +331,8 @@
       const unique = top.length === 1 && max > 1;
       const allSame = unique && max === answers.length && answers.length > 1;
       summary = allSame ? `Iedereen koos ${display[top[0]]}. Te makkelijk: iedereen krijgt +1.` : unique ? `Meerderheid: ${display[top[0]]} (${max} auto's).` : 'Geen duidelijke meerderheid. Deze ronde blijft puntloos.';
+      updates['rounds/' + roundNo + '/correctAnswer'] = unique ? display[top[0]] : 'Geen duidelijke meerderheid';
+      updates['rounds/' + roundNo + '/answerDetails'] = summary;
       answers.forEach(a => {
         let delta = 0, label = '';
         if (allSame) { delta = 1; label = 'iedereen hetzelfde'; }
@@ -293,7 +344,10 @@
       });
     } else {
       const correctKey = norm(q.answer);
-      summary = (q.type === 'quote' && q.answer === 'Dit is nooit gezegd' ? 'Deze quote is nooit gezegd.' : q.type === 'quote' ? `De quote was van ${q.answer}.` : q.type === 'truth' ? `Het was: ${q.answer}.` : `Goede antwoord: ${q.answer}.`) + (q.explain ? ' ' + q.explain : '');
+      const info = resultTextFor(q, round);
+      summary = `${info.title}: ${info.answer}.` + (info.details ? ' ' + info.details : '');
+      updates['rounds/' + roundNo + '/correctAnswer'] = info.answer;
+      updates['rounds/' + roundNo + '/answerDetails'] = info.details || '';
       answers.forEach(a => {
         const good = a.answerKey === correctKey;
         const delta = good ? Number(a.bet || 1) : -Number(a.bet || 1);
@@ -360,7 +414,6 @@
     if (!firebaseReady) return alert('Firebase is nog niet gekoppeld.');
     if (state.status !== 'active' || timeLeft() === 0) return;
     let ans = selectedAnswer;
-    if (ans === 'Andere naam') ans = $('customAnswer').value.trim();
     if (!ans) return alert('Kies een antwoord.');
     const team = teams[teamId] || { name: localStorage.getItem('wieIsHetTeamName') || 'Onbekend' };
     await base.child('rounds/' + state.round + '/answers/' + teamId).set({ teamId, teamName: team.name, answer: ans, answerKey: norm(ans), bet: selectedBet, at: firebase.database.ServerValue.TIMESTAMP });
@@ -375,6 +428,16 @@
   if ($('changeNameBtn')) $('changeNameBtn').onclick = () => { $('editTeamName').value = localStorage.getItem('wieIsHetTeamName') || (teams[teamId]?.name || ''); $('editCarPlayers').value = localStorage.getItem('wieIsHetPlayers') || (teams[teamId]?.players || ''); $('namePanel').classList.remove('hidden'); };
   if ($('closeName')) $('closeName').onclick = () => $('namePanel').classList.add('hidden');
   if ($('saveNameBtn')) $('saveNameBtn').onclick = async () => { await saveTeamNameFromFields('editTeamName', 'editCarPlayers'); $('namePanel').classList.add('hidden'); };
+
+
+  if ($('readyFoxBtn')) $('readyFoxBtn').onclick = async () => {
+    if (!firebaseReady) return alert('Firebase is nog niet gekoppeld.');
+    const team = teams[teamId] || { name: localStorage.getItem('wieIsHetTeamName') || 'Onbekend' };
+    await base.child('teams/' + teamId).update({ ready: true, name: team.name, players: team.players || localStorage.getItem('wieIsHetPlayers') || '', readyAt: firebase.database.ServerValue.TIMESTAMP });
+    renderLobby();
+  };
+  if ($('closeResultPopup')) $('closeResultPopup').onclick = () => $('resultPopup').classList.add('hidden');
+  if ($('popupNextBtn')) $('popupNextBtn').onclick = () => $('resultPopup').classList.add('hidden');
 
   if ($('hostUnlockBtn')) $('hostUnlockBtn').onclick = () => $('hostCodePanel').classList.remove('hidden');
   if ($('closeHostCode')) $('closeHostCode').onclick = () => $('hostCodePanel').classList.add('hidden');
@@ -403,9 +466,9 @@
   renderHostControls();
 
   if (firebaseReady) {
-    base.child('state').on('value', s => { state = s.val() || { round: -1, status: 'waiting', startedAt: null, duration: ROUND_SECONDS }; renderRound(); renderAnswers(); });
-    base.child('teams').on('value', s => { teams = s.val() || {}; renderLeaderboard(); renderRound(); });
-    base.child('rounds').on('value', s => { rounds = s.val() || {}; renderRound(); renderAnswers(); });
+    base.child('state').on('value', s => { state = s.val() || { round: -1, status: 'waiting', startedAt: null, duration: ROUND_SECONDS }; renderLobby(); renderRound(); renderAnswers(); });
+    base.child('teams').on('value', s => { teams = s.val() || {}; renderLeaderboard(); renderLobby(); renderRound(); });
+    base.child('rounds').on('value', s => { rounds = s.val() || {}; renderRound(); renderAnswers(); maybeShowResultPopup(); });
     setInterval(() => { renderRound(); renderAnswers(); }, 500);
   } else {
     renderRound();

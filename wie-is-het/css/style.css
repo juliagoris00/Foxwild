@@ -17,3 +17,12 @@ label{display:block;margin:13px 0 7px;color:var(--muted);font-weight:900}input,t
 .host-mini{border-color:rgba(82,255,168,.45);box-shadow:0 0 34px rgba(82,255,168,.08)}
 .tiny-host{opacity:.72;padding:10px 12px;font-size:13px}
 .tiny-host:hover{opacity:1}
+
+.lobby-card{border-color:rgba(255,224,138,.45);text-align:center}
+.fox-button{display:grid;gap:8px;place-items:center;width:100%;min-height:170px;margin-top:12px;border-radius:28px;background:radial-gradient(circle at 50% 20%,rgba(255,224,138,.28),rgba(255,79,154,.18)),linear-gradient(135deg,rgba(255,179,71,.35),rgba(139,92,246,.24));border:1px solid rgba(255,224,138,.42);box-shadow:0 20px 60px rgba(255,179,71,.12);font-size:24px}
+.fox-button .fox{font-size:76px;filter:drop-shadow(0 0 22px rgba(255,179,71,.5));line-height:1}
+.result-pop{text-align:center;border-color:rgba(255,224,138,.5);box-shadow:0 0 60px rgba(255,79,154,.2)}
+.popup-answer{font-size:clamp(1.7rem,6vw,3rem);font-weight:950;line-height:1.08;margin:12px 0;text-shadow:0 0 26px rgba(255,179,71,.35)}
+.result-pop .help{font-size:1.05rem}
+.result-summary-big{border-color:rgba(255,224,138,.5);background:linear-gradient(135deg,rgba(255,179,71,.18),rgba(255,79,154,.12));font-size:1.05rem}
+@media(max-width:620px){.fox-button{min-height:135px}.fox-button .fox{font-size:58px}}
